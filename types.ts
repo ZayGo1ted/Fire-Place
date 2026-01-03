@@ -17,6 +17,13 @@ export interface Review {
   date: string;
 }
 
+export interface GroundingChunk {
+  web?: {
+    uri: string;
+    title: string;
+  };
+}
+
 export enum MenuCategory {
   BREAKFAST = 'Breakfast',
   LUNCH = 'Lunch',

@@ -17,7 +17,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1,
+      threshold: 0.05,
       rootMargin: "0px 0px -50px 0px"
     };
 
@@ -40,33 +40,32 @@ const App: React.FC = () => {
       <Navbar lang={lang} setLang={setLang} />
       
       <main>
-        {/* We keep Hero active immediately to avoid initial black screen */}
-        <div className="reveal active">
+        <div id="home" className="reveal active">
           <Hero lang={lang} />
         </div>
         
-        <div className="reveal">
+        <div id="about" className="reveal">
           <About lang={lang} />
         </div>
         
-        <div className="reveal">
+        <div id="menu" className="reveal">
           <MenuSection lang={lang} />
         </div>
         
-        <div className="reveal">
+        <div id="reviews" className="reveal">
           <Reviews lang={lang} />
         </div>
         
-        <div className="reveal">
+        <div id="location" className="reveal">
           <Location lang={lang} />
         </div>
         
-        <div className="reveal">
+        <div id="contact" className="reveal">
           <Contact lang={lang} />
         </div>
       </main>
 
-      <footer className="py-24 bg-black border-t border-white/5 reveal">
+      <footer className="py-24 bg-black border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-16 mb-20">
             <div className="col-span-1 md:col-span-2">
@@ -88,7 +87,6 @@ const App: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#ff4d00] hover:border-[#ff4d00] transition-all text-gray-500 hover:text-white"
-                    aria-label="Facebook"
                   >
                     <Facebook size={16} />
                   </a>
@@ -99,7 +97,6 @@ const App: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#ff4d00] hover:border-[#ff4d00] transition-all text-gray-500 hover:text-white"
-                    aria-label="Instagram"
                   >
                     <Instagram size={16} />
                   </a>
@@ -122,17 +119,12 @@ const App: React.FC = () => {
               <ul className="space-y-4 text-gray-500 text-sm">
                 <li className="leading-relaxed font-light">{RESTAURANT_INFO.address}</li>
                 <li className="text-[#ff4d00] font-bold text-lg">{RESTAURANT_INFO.phone}</li>
-                <li className="text-xs text-gray-600">contact@fireplace-kenitra.ma</li>
               </ul>
             </div>
           </div>
 
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-600 text-[9px] uppercase tracking-[0.3em] font-bold">
             <p>© {new Date().getFullYear()} Fire Place Kenitra.</p>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-            </div>
           </div>
         </div>
       </footer>

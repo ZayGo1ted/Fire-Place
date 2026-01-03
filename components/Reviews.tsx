@@ -1,13 +1,15 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { REVIEWS, TRANSLATIONS } from '../constants.ts';
-import { Review, Language } from '../types.ts';
+import { fetchRealReviews } from '../services/geminiService.ts';
+import { Review, GroundingChunk, Language } from '../types.ts';
 
 interface Props { lang: Language; }
 
 const Reviews: React.FC<Props> = ({ lang }) => {
-  const [reviews] = useState<Review[]>(REVIEWS);
+  const [reviews, setReviews] = useState<Review[]>(REVIEWS);
+  const [sources, setSources] = useState<GroundingChunk[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const t = TRANSLATIONS[lang].reviews;
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -24,6 +26,20 @@ const Reviews: React.FC<Props> = ({ lang }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const loadGeminiReviews = async () => {
+      const data = await fetchRealReviews();
+      if (data.reviews && data.reviews.length > 0) {
+        // Merge with static reviews, avoiding duplicates if any
+        setReviews([...data.reviews, ...REVIEWS].slice(0, 10));
+      }
+      if (data.sources) {
+        setSources(data.sources);
+      }
+    };
+    loadGeminiReviews();
+  }, []);
+
   const totalPages = Math.ceil(reviews.length / itemsPerView);
 
   useEffect(() => {
@@ -33,7 +49,6 @@ const Reviews: React.FC<Props> = ({ lang }) => {
         setCurrentPage((prev) => (prev + 1) % totalPages);
       }, 8000);
     };
-
     startRotation();
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -59,6 +74,16 @@ const Reviews: React.FC<Props> = ({ lang }) => {
           <span className="text-[#ff4d00] font-bold uppercase tracking-[0.7em] mb-6 block text-[10px]">{t.label}</span>
           <h2 className="text-5xl md:text-8xl font-serif font-bold mb-8 italic text-white tracking-tight leading-tight">{t.title}</h2>
           <div className="w-20 h-px bg-[#ff4d00] mx-auto opacity-20"></div>
+          
+          {sources.length > 0 && (
+            <div className="mt-8 flex justify-center gap-4 flex-wrap">
+              {sources.map((s, i) => s.web && (
+                <a key={i} href={s.web.uri} target="_blank" rel="noopener" className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white/30 hover:text-[#ff4d00] transition-colors border border-white/5 px-4 py-2 rounded-full bg-white/[0.02]">
+                  <ExternalLink size={12} /> {s.web.title}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="relative max-w-[90rem] mx-auto mb-12 px-4">
@@ -100,21 +125,11 @@ const Reviews: React.FC<Props> = ({ lang }) => {
               ))}
             </div>
           </div>
-
+          
           {totalPages > 1 && (
-            <div className="flex justify-center gap-4 mt-16">
-              <button 
-                onClick={handleManualPrev}
-                className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#ff4d00] transition-all"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={handleManualNext}
-                className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#ff4d00] transition-all"
-              >
-                <ChevronRight size={24} />
-              </button>
+            <div className="flex justify-center gap-4 mt-12">
+               <button onClick={handleManualPrev} className="p-4 rounded-full border border-white/10 hover:border-[#ff4d00] transition-colors text-white/50 hover:text-white"><ChevronLeft size={20}/></button>
+               <button onClick={handleManualNext} className="p-4 rounded-full border border-white/10 hover:border-[#ff4d00] transition-colors text-white/50 hover:text-white"><ChevronRight size={20}/></button>
             </div>
           )}
         </div>
