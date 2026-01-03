@@ -18,20 +18,20 @@ const Hero: React.FC<Props> = ({ lang }) => {
           alt="Fire Place Atmosphere"
           className="w-full h-full object-cover scale-105 animate-[subtle-zoom_20s_infinite_alternate]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/30 to-black/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/40 to-black/98"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center mt-12 md:mt-20">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center mt-24 md:mt-32">
         <div className="mb-6 md:mb-10 inline-flex items-center gap-3 px-5 py-2 border border-white/10 rounded-full bg-white/5 backdrop-blur-md text-[#ff4d00] text-[8px] font-black uppercase tracking-[0.4em] animate-fade-in shadow-xl">
           <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d00] animate-pulse"></span>
           {t.location}
         </div>
         
-        <h1 className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[11rem] font-serif font-bold mb-6 tracking-tighter leading-[0.85] text-white animate-slide-up">
+        <h1 className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-serif font-bold mb-6 tracking-tighter leading-[0.8] text-white animate-slide-up">
           FIRE <span className="text-[#ff4d00] italic">PLACE</span>
         </h1>
         
-        <p className="text-xs sm:text-base md:text-lg lg:text-xl text-gray-400 mb-10 md:mb-16 max-w-xl mx-auto font-light leading-relaxed animate-fade-in-delay">
+        <p className="text-xs sm:text-base md:text-lg text-gray-400 mb-10 md:mb-16 max-w-xl mx-auto font-light leading-relaxed animate-fade-in-delay">
           {t.tagline}
         </p>
 
