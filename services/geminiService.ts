@@ -1,12 +1,37 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import { Review, GroundingChunk } from "../types";
+
+/**
+ * Safely retrieves the API key from the environment.
+ */
+const getApiKey = (): string => {
+  try {
+    // @ts-ignore
+    if (typeof process !== 'undefined' && process.env?.API_KEY) {
+      // @ts-ignore
+      return process.env.API_KEY;
+    }
+    // @ts-ignore
+    if (import.meta.env?.API_KEY) {
+      // @ts-ignore
+      return import.meta.env.API_KEY;
+    }
+  } catch (e) {}
+  return "";
+};
 
 /**
  * Fetches real customer reviews using Google Search Grounding.
  */
 export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: GroundingChunk[] }> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    console.warn("Gemini API key is missing. Skipping real reviews fetch.");
+    return { reviews: [], sources: [] };
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
