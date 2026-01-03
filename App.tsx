@@ -40,6 +40,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] selection:bg-[#ff4d00] selection:text-white">
+      {/* The Navbar component now only contains the Corner Translation Toggle */}
       <Navbar lang={lang} setLang={setLang} />
       
       <main>
@@ -76,7 +77,7 @@ const App: React.FC = () => {
                 <div className="w-10 h-10 rounded-xl bg-[#ff4d00]/10 flex items-center justify-center border border-[#ff4d00]/20">
                    <Flame className="w-6 h-6 text-[#ff4d00]" />
                 </div>
-                <span className="text-2xl font-serif font-bold tracking-tight">
+                <span className="text-2xl font-serif font-bold tracking-tight text-white">
                   FIRE <span className="text-[#ff4d00]">PLACE</span>
                 </span>
               </div>
