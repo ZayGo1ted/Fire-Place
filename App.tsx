@@ -1,15 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import MenuSection from './components/Menu';
-import Location from './components/Location';
-import Contact from './components/Contact';
-import Reviews from './components/Reviews';
-import { RESTAURANT_INFO, TRANSLATIONS } from './constants';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import About from './components/About.tsx';
+import MenuSection from './components/Menu.tsx';
+import Location from './components/Location.tsx';
+import Contact from './components/Contact.tsx';
+import Reviews from './components/Reviews.tsx';
+import { RESTAURANT_INFO, TRANSLATIONS } from './constants.ts';
 import { Instagram, Facebook, Flame } from 'lucide-react';
-import { Language } from './types';
+import { Language } from './types.ts';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
@@ -40,6 +40,7 @@ const App: React.FC = () => {
       <Navbar lang={lang} setLang={setLang} />
       
       <main>
+        {/* We keep Hero active immediately to avoid initial black screen */}
         <div className="reveal active">
           <Hero lang={lang} />
         </div>

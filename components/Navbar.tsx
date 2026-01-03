@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Flame, ChevronDown, ArrowUp } from 'lucide-react';
-import { RESTAURANT_INFO, TRANSLATIONS } from '../constants';
-import { Language } from '../types';
+import { RESTAURANT_INFO, TRANSLATIONS } from '../constants.ts';
+import { Language } from '../types.ts';
 
 interface Props {
   lang: Language;
@@ -25,7 +25,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
         const el = document.getElementById(id);
         if (!el) return Infinity;
         const rect = el.getBoundingClientRect();
-        // Check if the section is roughly in the middle of the viewport
         return Math.abs(rect.top);
       });
       const minOffsetIndex = offsets.indexOf(Math.min(...offsets));
@@ -43,7 +42,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
     const element = document.getElementById(nextId);
     
     if (element) {
-      const offset = 100; // Account for fixed navbar
+      const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -76,8 +75,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between relative">
-          
-          {/* Liquid Glass Background */}
           <div 
             className={`absolute inset-x-4 md:inset-x-8 -inset-y-2 transition-all duration-700 rounded-[2.5rem] pointer-events-none z-[-1] ${
               scrolled 
@@ -86,7 +83,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             }`}
           />
 
-          {/* Logo Section */}
           <a href="#home" className="flex items-center gap-4 group shrink-0 relative z-[81] pl-4">
             <div className={`w-11 h-11 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center border transition-all duration-700 shadow-2xl ${
               scrolled ? 'bg-[#ff4d00] border-[#ff4d00]' : 'bg-[#ff4d00]/10 border-[#ff4d00]/20'
@@ -98,7 +94,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </span>
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-14 xl:gap-24 ml-auto pr-4">
             <div className="flex items-center gap-10 xl:gap-14">
               {navLinks.map((link) => (
@@ -135,7 +130,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </div>
           </div>
 
-          {/* Mobile UI - Minimalist Language Toggle */}
           <div className="flex lg:hidden items-center gap-4 pr-4">
              <button 
                 onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
@@ -147,7 +141,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
         </div>
       </nav>
 
-      {/* Floating Action Button - Mobile Only - Positioned at end of viewport */}
       <div className="fixed bottom-10 right-6 lg:hidden z-[90] pointer-events-none">
         <button 
           onClick={handleFastScroll}

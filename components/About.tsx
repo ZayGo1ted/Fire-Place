@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { TRANSLATIONS } from '../constants';
-import { Language } from '../types';
+import { TRANSLATIONS } from '../constants.ts';
+import { Language } from '../types.ts';
 
 interface Props { lang: Language; }
 

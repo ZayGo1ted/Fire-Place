@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { RESTAURANT_INFO, TRANSLATIONS, INITIAL_MENU } from '../constants';
-import { MenuCategory, Language, MenuItem } from '../types';
+import { RESTAURANT_INFO, TRANSLATIONS, INITIAL_MENU } from '../constants.ts';
+import { MenuCategory, Language, MenuItem } from '../types.ts';
 import { Coffee, Utensils, Pizza, IceCream, Wine, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase.ts';
 
 interface Props { lang: Language; }
 
@@ -15,8 +15,6 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
 
   useEffect(() => {
     const fetchMenu = async () => {
-      // If supabase client is not initialized (due to missing env vars), 
-      // we gracefully skip the fetch and use the INITIAL_MENU from constants.
       if (!supabase) {
         setLoading(false);
         return;
@@ -30,9 +28,7 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
 
         if (error) {
           console.error('Error fetching menu from Supabase:', error);
-          // Keep static menu on error
         } else if (data && data.length > 0) {
-          // Transform Supabase flat structure back to our nested structure
           const transformed: MenuItem[] = data.map((item: any) => ({
             id: item.id,
             name: { fr: item.name_fr, en: item.name_en },

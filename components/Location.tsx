@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { MapPin, Navigation } from 'lucide-react';
-import { RESTAURANT_INFO, TRANSLATIONS } from '../constants';
-import { Language } from '../types';
+import { RESTAURANT_INFO, TRANSLATIONS } from '../constants.ts';
+import { Language } from '../types.ts';
 
 interface Props { lang: Language; }
 
@@ -39,7 +39,6 @@ const Location: React.FC<Props> = ({ lang }) => {
               loading="lazy"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.7554900767576!2d-6.587841123447959!3d34.26756857307436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7596000000001%3A0x8899889988998899!2sFire%20Place!5e0!3m2!1sen!2sma!4v1700000000000!5m2!1sen!2sma"
             ></iframe>
-            <div className="absolute inset-0 pointer-events-none border border-white/10 rounded-[2.5rem]"></div>
           </div>
         </div>
       </div>

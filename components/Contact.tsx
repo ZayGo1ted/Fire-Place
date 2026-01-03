@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Phone, MessageSquare, Clock } from 'lucide-react';
-import { RESTAURANT_INFO, TRANSLATIONS } from '../constants';
-import { Language } from '../types';
+import { RESTAURANT_INFO, TRANSLATIONS } from '../constants.ts';
+import { Language } from '../types.ts';
 
 interface Props { lang: Language; }
 

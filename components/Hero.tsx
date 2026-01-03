@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { RESTAURANT_INFO, TRANSLATIONS } from '../constants';
-import { Language } from '../types';
+import { RESTAURANT_INFO, TRANSLATIONS } from '../constants.ts';
+import { Language } from '../types.ts';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 
 interface Props { lang: Language; }
@@ -50,10 +50,6 @@ const Hero: React.FC<Props> = ({ lang }) => {
             <MessageCircle size={24} /> <span>WhatsApp</span>
           </a>
         </div>
-      </div>
-
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 opacity-30 hidden sm:flex">
-        <div className="w-px h-28 bg-gradient-to-b from-[#ff4d00] to-transparent"></div>
       </div>
 
       <style>{`
