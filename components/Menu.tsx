@@ -72,10 +72,10 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-500 font-bold uppercase text-[10px] tracking-[0.2em] backdrop-blur-md border leading-none
+              className={`flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-500 font-bold uppercase text-[10px] tracking-[0.2em] border leading-none liquid-glass
                 ${activeCategory === cat.id
                   ? 'bg-[#ff4d00] text-white shadow-2xl shadow-[#ff4d00]/30 border-[#ff4d00]'
-                  : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10 hover:text-white'
+                  : 'text-white/50 hover:bg-white/10 hover:text-white'
                 }`}
             >
               {cat.icon}
@@ -92,7 +92,7 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
         ) : (
           <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto min-h-[400px]">
             {filteredItems.length > 0 ? filteredItems.map((item) => (
-              <div key={item.id} className="group relative backdrop-blur-3xl bg-white/[0.02] p-10 rounded-[2.5rem] border border-white/5 hover:border-[#ff4d00]/30 transition-all duration-500 hover:-translate-y-2">
+              <div key={item.id} className="group relative liquid-glass liquid-glass-hover p-10 rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2">
                 <div className="flex justify-between items-baseline mb-4">
                   <h3 className="text-2xl font-serif font-bold group-hover:text-[#ff4d00] transition-colors duration-500 text-white tracking-tight">
                     {item.name[lang]}

@@ -24,100 +24,100 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
     { name: t.footer.home, href: '#home' },
     { name: t.footer.about, href: '#about' },
     { name: t.footer.menu, href: '#menu' },
-    { name: 'Testimonials', href: '#reviews' },
+    { name: t.footer.testimonials, href: '#reviews' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const safePhone = RESTAURANT_INFO.phone.replace(/[^0-9+]/g, '');
 
   return (
-    <header 
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
-        scrolled ? 'py-4 glass-nav border-b border-white/5' : 'py-8 bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
-        {/* Logo Section - Given more space */}
-        <a href="#home" className="flex items-center gap-4 group">
-          <div className="relative">
-            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all duration-500 shadow-2xl ${
+    <>
+      <header 
+        className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
+          scrolled ? 'py-3 glass-nav' : 'py-6 bg-transparent'
+        }`}
+      >
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          {/* Logo Section */}
+          <a href="#home" className="flex items-center gap-3 shrink-0">
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
               scrolled ? 'bg-[#ff4d00]' : 'bg-white/10 backdrop-blur-md border border-white/20'
             }`}>
-              <Flame className={`w-5 h-5 md:w-6 md:h-6 ${scrolled ? 'text-white' : 'text-[#ff4d00]'}`} />
+              <Flame className={`w-5 h-5 ${scrolled ? 'text-white' : 'text-[#ff4d00]'}`} />
             </div>
-            {!scrolled && (
-               <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#050505] animate-pulse"></div>
-            )}
-          </div>
-          <div className="flex flex-col -gap-1">
-            <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-white">
-              FIRE <span className="text-[#ff4d00] italic">PLACE</span>
-            </span>
-            <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 font-black">Café & Restaurant</span>
-          </div>
-        </a>
-
-        {/* Desktop Links - Improved padding and spacing */}
-        <nav className="hidden lg:flex items-center bg-white/[0.03] border border-white/10 px-8 py-2 rounded-full backdrop-blur-lg ml-12">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="px-6 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/50 hover:text-[#ff4d00] transition-all duration-300 relative group"
-            >
-              {link.name}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[#ff4d00] transition-all duration-300 group-hover:w-1/2"></span>
-            </a>
-          ))}
-        </nav>
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-            className="hidden sm:block text-[10px] font-black tracking-[0.2em] text-white/60 hover:text-white transition-colors"
-          >
-            {lang === 'fr' ? 'EN' : 'FR'}
-          </button>
-          
-          <a
-            href={`tel:${safePhone}`}
-            className="hidden md:flex h-11 items-center justify-center px-8 rounded-xl bg-[#ff4d00] text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500 shadow-lg shadow-[#ff4d00]/20"
-          >
-            {lang === 'fr' ? 'Réserver' : 'Book Now'}
+            <div className="flex flex-col">
+              <span className="text-lg font-serif font-bold tracking-tight text-white leading-none">
+                FIRE <span className="text-[#ff4d00] italic">PLACE</span>
+              </span>
+              <span className="text-[7px] uppercase tracking-[0.3em] text-white/40 font-bold mt-1">Est. {RESTAURANT_INFO.openedDate}</span>
+            </div>
           </a>
 
-          <button 
-            className="lg:hidden text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+          {/* Desktop Links - Smaller and spaced out to avoid "blending" */}
+          <nav className="hidden lg:flex items-center gap-2 ml-auto mr-10">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all hover:bg-white/5 rounded-full shine-link"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+              className="hidden sm:block text-[9px] font-black tracking-[0.1em] text-white/40 hover:text-white transition-colors border border-white/10 px-3 py-1 rounded-md"
+            >
+              {lang === 'fr' ? 'FR' : 'EN'}
+            </button>
+            
+            <a
+              href={`tel:${safePhone}`}
+              className="hidden md:flex h-10 items-center justify-center px-6 rounded-lg bg-[#ff4d00] text-white text-[9px] font-black uppercase tracking-[0.1em] hover:bg-white hover:text-black transition-all shadow-lg shadow-[#ff4d00]/10"
+            >
+              Book
+            </a>
+
+            <button 
+              className="lg:hidden text-white p-2 bg-white/5 rounded-lg border border-white/10"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#050505] z-[-1] transition-transform duration-500 lg:hidden ${
-        mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+      <div className={`fixed inset-0 bg-[#050505]/95 backdrop-blur-2xl z-[999] transition-all duration-500 lg:hidden ${
+        mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>
-        <div className="flex flex-col items-center justify-center h-full gap-8">
-          {navLinks.map((link) => (
+        <div className="flex flex-col items-center justify-center h-full gap-8 p-10">
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#ff4d00]/15 blur-[100px] rounded-full"></div>
+          {navLinks.map((link, idx) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-2xl font-serif font-bold text-white hover:text-[#ff4d00]"
+              className={`text-3xl font-serif font-bold text-white hover:text-[#ff4d00] transition-all transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              style={{ transitionDelay: `${idx * 100}ms` }}
             >
               {link.name}
             </a>
           ))}
-          <div className="flex gap-4 mt-8">
-            <button onClick={() => setLang('fr')} className={`px-4 py-2 rounded-lg ${lang === 'fr' ? 'bg-[#ff4d00] text-white' : 'text-white/40'}`}>FR</button>
-            <button onClick={() => setLang('en')} className={`px-4 py-2 rounded-lg ${lang === 'en' ? 'bg-[#ff4d00] text-white' : 'text-white/40'}`}>EN</button>
+          <div className={`flex gap-6 mt-12 transform transition-all delay-500 ${mobileMenuOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}>
+            <button onClick={() => {setLang('fr'); setMobileMenuOpen(false);}} className={`text-sm font-black tracking-widest ${lang === 'fr' ? 'text-[#ff4d00]' : 'text-white/40'}`}>FRANÇAIS</button>
+            <div className="w-px h-4 bg-white/10"></div>
+            <button onClick={() => {setLang('en'); setMobileMenuOpen(false);}} className={`text-sm font-black tracking-widest ${lang === 'en' ? 'text-[#ff4d00]' : 'text-white/40'}`}>ENGLISH</button>
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 

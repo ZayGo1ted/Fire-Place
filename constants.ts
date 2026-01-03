@@ -117,6 +117,7 @@ export const RESTAURANT_INFO = {
   phone: '+212 537 364 455',
   whatsapp: '+212 661 000 000',
   hours: '07:30 - 23:30',
+  openedDate: '2018',
   address: 'Corniche de Kenitra, Avenue Mohammed V, Kenitra',
   socials: {
     instagram: 'https://www.instagram.com/fireplace_kenitra/',

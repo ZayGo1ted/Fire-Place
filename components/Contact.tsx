@@ -21,7 +21,7 @@ const Contact: React.FC<Props> = ({ lang }) => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="glass p-12 rounded-[2.5rem] transition-all duration-700 group hover:border-[#ff4d00]/30 flex flex-col items-center text-center">
+          <div className="liquid-glass liquid-glass-hover p-12 rounded-[2.5rem] transition-all duration-700 group flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[#ff4d00] mb-8 group-hover:bg-[#ff4d00] group-hover:text-white transition-all duration-500 shadow-xl">
               <Phone size={28} />
             </div>
@@ -29,7 +29,7 @@ const Contact: React.FC<Props> = ({ lang }) => {
             <a href={`tel:${safePhone}`} className="text-white font-serif text-2xl hover:text-[#ff4d00] transition-colors tracking-tight">{RESTAURANT_INFO.phone}</a>
           </div>
 
-          <div className="glass p-12 rounded-[2.5rem] transition-all duration-700 group hover:border-[#ff4d00]/30 flex flex-col items-center text-center">
+          <div className="liquid-glass liquid-glass-hover p-12 rounded-[2.5rem] transition-all duration-700 group flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[#ff4d00] mb-8 group-hover:bg-[#ff4d00] group-hover:text-white transition-all duration-500 shadow-xl">
               <MessageSquare size={28} />
             </div>
@@ -37,7 +37,7 @@ const Contact: React.FC<Props> = ({ lang }) => {
             <a href={waLink} target="_blank" rel="noopener noreferrer" className="text-white font-serif text-2xl hover:text-[#ff4d00] transition-colors tracking-tight">Chat Now</a>
           </div>
 
-          <div className="glass p-12 rounded-[2.5rem] transition-all duration-700 group hover:border-[#ff4d00]/30 flex flex-col items-center text-center">
+          <div className="liquid-glass liquid-glass-hover p-12 rounded-[2.5rem] transition-all duration-700 group flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[#ff4d00] mb-8 group-hover:bg-[#ff4d00] group-hover:text-white transition-all duration-500 shadow-xl">
               <Clock size={28} />
             </div>
