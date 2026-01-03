@@ -1,5 +1,5 @@
 
-import { MenuItem, MenuCategory } from './types';
+import { MenuItem, MenuCategory } from './types.ts';
 
 export const TRANSLATIONS = {
   fr: {

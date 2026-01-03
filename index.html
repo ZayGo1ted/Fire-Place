@@ -28,9 +28,8 @@
         font-family: 'Playfair Display', serif;
       }
       
-      /* Safety: Default to visible but shifted, animate to final state */
       .reveal {
-        opacity: 0.99;
+        opacity: 0;
         transform: translateY(15px);
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
                     transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,6 +74,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <script type="module" src="index.tsx"></script>
   </body>
 </html>
