@@ -8,6 +8,8 @@
     <!-- Shim for process.env to prevent ReferenceErrors in browser ESM -->
     <script>
       window.process = window.process || { env: {} };
+      // Fallback for environment variables if not injected by host
+      window.process.env = window.process.env || {};
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +41,7 @@
                     transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
+      /* Only hide if JS is ready and element is not active */
       .js-ready .reveal:not(.active) {
         opacity: 0;
         transform: translateY(15px);
@@ -84,6 +87,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>

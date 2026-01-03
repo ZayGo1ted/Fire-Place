@@ -1,16 +1,29 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const getEnv = (key: string): string => {
+const getEnvValue = (key: string): string => {
   try {
-    // @ts-ignore
-    return process.env[key] || import.meta.env[key] || '';
-  } catch {
-    return '';
+    // Check process.env (Vercel/Production)
+    if (typeof process !== 'undefined' && process.env && process.env[key]) {
+      return process.env[key] as string;
+    }
+    // Check import.meta.env (Vite/Local)
+    if (typeof (import.meta as any).env !== 'undefined' && (import.meta as any).env[key]) {
+      return (import.meta as any).env[key];
+    }
+  } catch (e) {
+    // Silent fail
   }
+  return '';
 };
 
-const url = getEnv('VITE_SUPABASE_URL');
-const key = getEnv('VITE_SUPABASE_ANON_KEY');
+const supabaseUrl = getEnvValue('VITE_SUPABASE_URL');
+const supabaseAnonKey = getEnvValue('VITE_SUPABASE_ANON_KEY');
 
-export const supabase = (url && key) ? createClient(url, key) : null;
+export const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
+  : null;
+
+if (!supabase) {
+  console.info("Supabase not configured. Using local fallback data.");
+}
