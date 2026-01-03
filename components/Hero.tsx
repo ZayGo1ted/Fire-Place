@@ -21,7 +21,7 @@ const Hero: React.FC<Props> = ({ lang }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/40 to-black/98"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center mt-24 md:mt-32">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center pt-24">
         <div className="mb-6 md:mb-10 inline-flex items-center gap-3 px-5 py-2 border border-white/10 rounded-full bg-white/5 backdrop-blur-md text-[#ff4d00] text-[8px] font-black uppercase tracking-[0.4em] animate-fade-in shadow-xl">
           <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d00] animate-pulse"></span>
           {t.location}
@@ -56,7 +56,7 @@ const Hero: React.FC<Props> = ({ lang }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-10 hidden xl:flex items-center gap-6">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 flex items-center gap-6">
         <a href={RESTAURANT_INFO.socials.instagram} className="text-white/20 hover:text-[#ff4d00] transition-colors"><Instagram size={18}/></a>
         <div className="w-10 h-px bg-white/10"></div>
         <span className="text-[8px] uppercase tracking-[0.3em] text-white/20 font-bold">Kenitra Riverside</span>
