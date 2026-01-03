@@ -9,13 +9,6 @@ export interface MenuItem {
   category: string;
 }
 
-export interface GroundingChunk {
-  web?: {
-    uri: string;
-    title: string;
-  };
-}
-
 export interface Review {
   id: string;
   name: string;

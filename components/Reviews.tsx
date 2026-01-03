@@ -1,15 +1,13 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Star, Quote, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { REVIEWS, TRANSLATIONS } from '../constants.ts';
-import { fetchRealReviews } from '../services/geminiService.ts';
-import { Review, GroundingChunk, Language } from '../types.ts';
+import { Review, Language } from '../types.ts';
 
 interface Props { lang: Language; }
 
 const Reviews: React.FC<Props> = ({ lang }) => {
-  const [reviews, setReviews] = useState<Review[]>(REVIEWS);
-  const [sources, setSources] = useState<GroundingChunk[]>([]);
+  const [reviews] = useState<Review[]>(REVIEWS);
   const [currentPage, setCurrentPage] = useState(0);
   const t = TRANSLATIONS[lang].reviews;
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -24,34 +22,6 @@ const Reviews: React.FC<Props> = ({ lang }) => {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const loadReviews = async () => {
-      try {
-        const data = await fetchRealReviews();
-        const uniqueReviews: Review[] = [];
-        const seenKeys = new Set();
-
-        [...data.reviews, ...REVIEWS].forEach(r => {
-          if (!r || !r.name) return;
-          const key = `${r.name.toLowerCase()}-${r.comment.substring(0, 10).toLowerCase()}`;
-          if (!seenKeys.has(key)) {
-            seenKeys.add(key);
-            uniqueReviews.push(r);
-          }
-        });
-
-        if (uniqueReviews.length > 0) {
-          setReviews(uniqueReviews.slice(0, 12));
-        }
-        if (data.sources) setSources(data.sources);
-      } catch (err) { console.error("Reviews load error:", err); }
-    };
-    loadReviews();
-
-    const refreshInterval = setInterval(loadReviews, 300000);
-    return () => clearInterval(refreshInterval);
   }, []);
 
   const totalPages = Math.ceil(reviews.length / itemsPerView);
@@ -130,7 +100,23 @@ const Reviews: React.FC<Props> = ({ lang }) => {
               ))}
             </div>
           </div>
-          {/* Controls logic omitted for brevity, identical to previous */}
+
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-4 mt-16">
+              <button 
+                onClick={handleManualPrev}
+                className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#ff4d00] transition-all"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button 
+                onClick={handleManualNext}
+                className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#ff4d00] transition-all"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
