@@ -33,24 +33,24 @@
       .js-ready .reveal:not(.active) { opacity: 0; transform: translateY(20px); }
       .reveal.active { opacity: 1 !important; transform: translateY(0) !important; }
       
-      /* Liquid Glass Engine - The iPhone Dock Aesthetic */
+      /* Liquid Glass Engine - The Floating Dock Aesthetic */
       .glass-dock {
-        background: rgba(15, 15, 15, 0.5);
-        backdrop-filter: blur(30px) saturate(210%) contrast(95%);
-        -webkit-backdrop-filter: blur(30px) saturate(210%) contrast(95%);
+        background: rgba(10, 10, 10, 0.55);
+        backdrop-filter: blur(32px) saturate(220%) contrast(90%);
+        -webkit-backdrop-filter: blur(32px) saturate(220%) contrast(90%);
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 
-          0 4px 24px -1px rgba(0, 0, 0, 0.5),
-          inset 0 1px 1px rgba(255, 255, 255, 0.1),
-          0 0 0 1px rgba(255, 255, 255, 0.05);
+          0 8px 32px rgba(0, 0, 0, 0.6),
+          inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .liquid-glass {
         background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(20px) saturate(160%);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 15px 35px rgba(0,0,0,0.4);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 15px 35px rgba(0,0,0,0.5);
       }
 
       .liquid-glass-hover {
@@ -58,9 +58,9 @@
       }
       .liquid-glass-hover:hover {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 77, 0, 0.3);
+        border: 1px solid rgba(255, 77, 0, 0.4);
         transform: translateY(-5px);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 25px 50px rgba(0,0,0,0.6);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 25px 50px rgba(0,0,0,0.7);
       }
       
       ::-webkit-scrollbar { width: 3px; }
