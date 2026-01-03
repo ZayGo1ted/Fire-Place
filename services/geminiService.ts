@@ -3,32 +3,41 @@ import { GoogleGenAI } from "@google/genai";
 import { Review, GroundingChunk } from "../types.ts";
 
 /**
- * Fetches real customer reviews using Google Search Grounding to provide up-to-date feedback.
+ * Fetches real customer reviews using Google Search Grounding.
+ * Safeguarded against environment variable access errors.
  */
 export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: GroundingChunk[] }> => {
-  // Safe environment variable access for browser contexts
   const getApiKey = () => {
     try {
+      // Check for process.env first (System required)
       // @ts-ignore
-      if (typeof process !== 'undefined' && process.env) {
+      if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
         // @ts-ignore
         return process.env.API_KEY;
       }
-    } catch (e) {}
+      // Fallback to Vite meta env
+      // @ts-ignore
+      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_KEY) {
+        // @ts-ignore
+        return import.meta.env.VITE_API_KEY;
+      }
+    } catch (e) {
+      return null;
+    }
     return null;
   };
 
   const apiKey = getApiKey();
   if (!apiKey) {
-    console.warn("API Key missing. Gemini features disabled.");
+    console.warn("Gemini API Key not found in process.env.API_KEY. Feature disabled.");
     return { reviews: [], sources: [] };
   }
 
-  const ai = new GoogleGenAI({ apiKey });
   try {
+    const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: "Search for real, recent customer reviews of 'Fire Place Café & Restaurant' located on the Corniche in Kenitra, Morocco. Provide a JSON array containing up to 4 reviews. Each review object must have: id, name, rating (1-5), comment (in the reviewer's original language if possible), and date. Return ONLY the JSON array, no markdown.",
+      contents: "Search for real, recent customer reviews (last 6 months) of 'Fire Place Café & Restaurant' on the Corniche in Kenitra, Morocco. Provide a JSON array of 4 reviews with fields: id, name, rating (1-5), comment, and date. Return ONLY JSON.",
       config: {
         tools: [{ googleSearch: {} }],
       },
@@ -39,20 +48,17 @@ export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: 
     
     let reviews: Review[] = [];
     try {
-      const start = text.indexOf('[');
-      const end = text.lastIndexOf(']');
-      if (start !== -1 && end !== -1) {
-        reviews = JSON.parse(text.substring(start, end + 1));
-      } else {
-        reviews = JSON.parse(text);
+      const jsonMatch = text.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        reviews = JSON.parse(jsonMatch[0]);
       }
     } catch (e) {
-      console.warn("Failed to parse reviews from Gemini output:", e);
+      console.error("Failed to parse Gemini JSON:", e);
     }
 
     return { reviews, sources };
   } catch (error) {
-    console.error("Gemini fetch error:", error);
+    console.error("Gemini service error:", error);
     return { reviews: [], sources: [] };
   }
 };
