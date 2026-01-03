@@ -32,89 +32,85 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
-          scrolled ? 'py-3 glass-nav' : 'py-6 bg-transparent'
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          {/* Logo Section */}
-          <a href="#home" className="flex items-center gap-3 shrink-0">
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-              scrolled ? 'bg-[#ff4d00]' : 'bg-white/10 backdrop-blur-md border border-white/20'
-            }`}>
-              <Flame className={`w-5 h-5 ${scrolled ? 'text-white' : 'text-[#ff4d00]'}`} />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-serif font-bold tracking-tight text-white leading-none">
-                FIRE <span className="text-[#ff4d00] italic">PLACE</span>
-              </span>
-              <span className="text-[7px] uppercase tracking-[0.3em] text-white/40 font-bold mt-1">Est. {RESTAURANT_INFO.openedDate}</span>
-            </div>
-          </a>
-
-          {/* Desktop Links - Smaller and spaced out to avoid "blending" */}
-          <nav className="hidden lg:flex items-center gap-2 ml-auto mr-10">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all hover:bg-white/5 rounded-full shine-link"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-              className="hidden sm:block text-[9px] font-black tracking-[0.1em] text-white/40 hover:text-white transition-colors border border-white/10 px-3 py-1 rounded-md"
-            >
-              {lang === 'fr' ? 'FR' : 'EN'}
-            </button>
-            
-            <a
-              href={`tel:${safePhone}`}
-              className="hidden md:flex h-10 items-center justify-center px-6 rounded-lg bg-[#ff4d00] text-white text-[9px] font-black uppercase tracking-[0.1em] hover:bg-white hover:text-black transition-all shadow-lg shadow-[#ff4d00]/10"
-            >
-              Book
+      <div className="fixed top-0 left-0 w-full z-[1000] px-4 md:px-8 pointer-events-none">
+        <header 
+          className={`mx-auto max-w-7xl mt-4 md:mt-6 transition-all duration-500 rounded-2xl md:rounded-[2rem] glass-nav pointer-events-auto ${
+            scrolled ? 'py-2 md:py-3' : 'py-4 md:py-5'
+          }`}
+        >
+          <div className="container mx-auto px-6 flex items-center justify-between">
+            {/* Brand - Smaller but sharper */}
+            <a href="#home" className="flex items-center gap-3 shrink-0">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#ff4d00] flex items-center justify-center shadow-lg shadow-[#ff4d00]/20">
+                <Flame className="w-4 h-4 md:w-5 md:h-5 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-base md:text-lg font-serif font-bold tracking-tight text-white leading-none">
+                  FIRE <span className="text-[#ff4d00] italic">PLACE</span>
+                </span>
+                <span className="hidden sm:block text-[6px] md:text-[7px] uppercase tracking-[0.3em] text-white/30 font-bold mt-0.5">EST. {RESTAURANT_INFO.openedDate}</span>
+              </div>
             </a>
 
-            <button 
-              className="lg:hidden text-white p-2 bg-white/5 rounded-lg border border-white/10"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Menu"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-      </header>
+            {/* Navigation - Uniform smaller text */}
+            <nav className="hidden lg:flex items-center bg-white/[0.03] rounded-full border border-white/5 px-2 py-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="px-4 py-1.5 text-[8px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-white transition-all rounded-full shine-link"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#050505]/95 backdrop-blur-2xl z-[999] transition-all duration-500 lg:hidden ${
-        mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            {/* Actions */}
+            <div className="flex items-center gap-3 md:gap-4">
+              <button 
+                onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+                className="text-[8px] md:text-[9px] font-black tracking-widest text-white/40 hover:text-white px-3 py-1 bg-white/5 rounded-md border border-white/5"
+              >
+                {lang === 'fr' ? 'FR' : 'EN'}
+              </button>
+              
+              <a
+                href={`tel:${safePhone}`}
+                className="h-8 md:h-10 flex items-center justify-center px-4 md:px-6 rounded-lg bg-[#ff4d00] text-white text-[8px] md:text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-md"
+              >
+                BOOK
+              </a>
+
+              <button 
+                className="lg:hidden text-white p-1.5 md:p-2 bg-white/5 rounded-lg border border-white/5"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      {/* Unified Mobile Menu with same styling */}
+      <div className={`fixed inset-0 bg-[#050505]/98 backdrop-blur-3xl z-[999] transition-all duration-500 lg:hidden ${
+        mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
         <div className="flex flex-col items-center justify-center h-full gap-8 p-10">
-          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#ff4d00]/15 blur-[100px] rounded-full"></div>
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#ff4d00]/10 blur-[100px] rounded-full"></div>
           {navLinks.map((link, idx) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className={`text-3xl font-serif font-bold text-white hover:text-[#ff4d00] transition-all transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              className={`text-2xl md:text-3xl font-serif font-bold text-white hover:text-[#ff4d00] transition-all transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
               {link.name}
             </a>
           ))}
-          <div className={`flex gap-6 mt-12 transform transition-all delay-500 ${mobileMenuOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}>
-            <button onClick={() => {setLang('fr'); setMobileMenuOpen(false);}} className={`text-sm font-black tracking-widest ${lang === 'fr' ? 'text-[#ff4d00]' : 'text-white/40'}`}>FRANÇAIS</button>
-            <div className="w-px h-4 bg-white/10"></div>
-            <button onClick={() => {setLang('en'); setMobileMenuOpen(false);}} className={`text-sm font-black tracking-widest ${lang === 'en' ? 'text-[#ff4d00]' : 'text-white/40'}`}>ENGLISH</button>
-          </div>
+          <div className="w-12 h-px bg-white/10 mt-4"></div>
+          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Kenitra Riverside</p>
         </div>
       </div>
     </>
