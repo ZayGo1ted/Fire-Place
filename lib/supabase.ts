@@ -1,32 +1,16 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const getEnvVar = (key: string): string => {
+const getEnv = (key: string): string => {
   try {
-    // Try process.env (Standard deployment)
     // @ts-ignore
-    if (typeof process !== 'undefined' && process.env && process.env[key]) {
-      // @ts-ignore
-      return process.env[key];
-    }
-    
-    // Try import.meta.env (Vite local development)
-    // @ts-ignore
-    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
-      // @ts-ignore
-      return import.meta.env[key];
-    }
-  } catch (e) {}
-  return '';
+    return process.env[key] || import.meta.env[key] || '';
+  } catch {
+    return '';
+  }
 };
 
-const supabaseUrl = getEnvVar('VITE_SUPABASE_URL');
-const supabaseAnonKey = getEnvVar('VITE_SUPABASE_ANON_KEY');
+const url = getEnv('VITE_SUPABASE_URL');
+const key = getEnv('VITE_SUPABASE_ANON_KEY');
 
-export const supabase = (supabaseUrl && supabaseAnonKey) 
-  ? createClient(supabaseUrl, supabaseAnonKey) 
-  : null;
-
-if (!supabase) {
-  console.info("Supabase credentials not found. Using local menu data.");
-}
+export const supabase = (url && key) ? createClient(url, key) : null;

@@ -2,34 +2,19 @@
 import { GoogleGenAI } from "@google/genai";
 import { Review, GroundingChunk } from "../types.ts";
 
-/**
- * Fetches real customer reviews using Google Search Grounding.
- * Safeguarded against environment variable access errors.
- */
 export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: GroundingChunk[] }> => {
   const getApiKey = () => {
     try {
-      // Check for process.env first (System required)
       // @ts-ignore
-      if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
-        // @ts-ignore
-        return process.env.API_KEY;
-      }
-      // Fallback to Vite meta env
-      // @ts-ignore
-      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_KEY) {
-        // @ts-ignore
-        return import.meta.env.VITE_API_KEY;
-      }
+      return process.env.API_KEY || import.meta.env.VITE_API_KEY || null;
     } catch (e) {
       return null;
     }
-    return null;
   };
 
   const apiKey = getApiKey();
   if (!apiKey) {
-    console.warn("Gemini API Key not found in process.env.API_KEY. Feature disabled.");
+    console.warn("API Key not found. Gemini features disabled.");
     return { reviews: [], sources: [] };
   }
 
@@ -37,7 +22,7 @@ export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: 
     const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: "Search for real, recent customer reviews (last 6 months) of 'Fire Place Café & Restaurant' on the Corniche in Kenitra, Morocco. Provide a JSON array of 4 reviews with fields: id, name, rating (1-5), comment, and date. Return ONLY JSON.",
+      contents: "Search for real, recent customer reviews of 'Fire Place Café & Restaurant' in Kenitra, Morocco. Provide a JSON array of 4 reviews: id, name, rating, comment, date. Return ONLY JSON.",
       config: {
         tools: [{ googleSearch: {} }],
       },
@@ -48,17 +33,15 @@ export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: 
     
     let reviews: Review[] = [];
     try {
-      const jsonMatch = text.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        reviews = JSON.parse(jsonMatch[0]);
-      }
+      const match = text.match(/\[[\s\S]*\]/);
+      if (match) reviews = JSON.parse(match[0]);
     } catch (e) {
-      console.error("Failed to parse Gemini JSON:", e);
+      console.error("JSON Parse error:", e);
     }
 
     return { reviews, sources };
   } catch (error) {
-    console.error("Gemini service error:", error);
+    console.error("Gemini Error:", error);
     return { reviews: [], sources: [] };
   }
 };
