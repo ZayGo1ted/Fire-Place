@@ -1,0 +1,7 @@
+{
+  "name": "Fire Place – Café & Restaurant",
+  "description": "A modern, elegant restaurant website for Fire Place in Kenitra, Morocco, featuring a dark theme, Moroccan-International fusion menu, and AI-powered local insights.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
