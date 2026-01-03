@@ -16,8 +16,11 @@ const App: React.FC = () => {
   const t = TRANSLATIONS[lang];
 
   useEffect(() => {
+    // Add js-ready class to enable animations defined in CSS
+    document.documentElement.classList.add('js-ready');
+
     const observerOptions = {
-      threshold: 0.05,
+      threshold: 0.1,
       rootMargin: "0px 0px -50px 0px"
     };
 

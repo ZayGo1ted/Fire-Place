@@ -6,8 +6,19 @@ import { Review, GroundingChunk } from "../types.ts";
  * Fetches real customer reviews using Google Search Grounding to provide up-to-date feedback.
  */
 export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: GroundingChunk[] }> => {
-  // Use the API_KEY from the environment as required.
-  const apiKey = process.env.API_KEY;
+  // Safe environment variable access for browser contexts
+  const getApiKey = () => {
+    try {
+      // @ts-ignore
+      if (typeof process !== 'undefined' && process.env) {
+        // @ts-ignore
+        return process.env.API_KEY;
+      }
+    } catch (e) {}
+    return null;
+  };
+
+  const apiKey = getApiKey();
   if (!apiKey) {
     console.warn("API Key missing. Gemini features disabled.");
     return { reviews: [], sources: [] };
@@ -28,7 +39,6 @@ export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: 
     
     let reviews: Review[] = [];
     try {
-      // Find the JSON block if the model included extra text
       const start = text.indexOf('[');
       const end = text.lastIndexOf(']');
       if (start !== -1 && end !== -1) {

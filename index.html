@@ -28,15 +28,21 @@
         font-family: 'Playfair Display', serif;
       }
       
-      .reveal {
+      /* Only hide elements for animation if JS is actually working */
+      .js-ready .reveal {
         opacity: 0;
         transform: translateY(15px);
+      }
+      
+      .reveal.active {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      
+      /* Base reveal transition */
+      .reveal {
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
                     transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
       }
       
       .glass {
@@ -74,6 +80,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
