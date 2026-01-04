@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
       pillar2: "Fraîcheur",
       pillar2Desc: "Produits de la mer et du terroir sélectionnés chaque matin.",
       pillar3: "Ambiance",
-      pillar3Desc: "Un design épuré conçu pour la sérénité au bord du fleuve."
+      pillar3Desc: "Un design épuré conçu pour la serrénité au bord du fleuve."
     },
     menu: {
       label: "Gastronomie",
@@ -180,41 +180,41 @@ export const TRANSLATIONS = {
 
 export const RESTAURANT_INFO = {
   name: 'Fire Place',
-  phone: '+212 537 364 455',
-  whatsapp: '+212 661 000 000',
+  phone: '0537327944',
+  whatsapp: '+212 626 643 666',
   hours: '07:30 - 23:30',
   openedDate: '2018',
   address: 'Corniche de Kenitra, Avenue Mohammed V, Kenitra',
   socials: {
-    instagram: 'https://www.instagram.com/fireplace_kenitra/',
-    facebook: 'https://www.facebook.com/fireplacekenitra/'
+    instagram: 'https://www.instagram.com/fireplace.kenitra/',
+    facebook: 'https://www.facebook.com/fireplacekenitraa/'
   }
 };
 
 export const INITIAL_MENU: MenuItem[] = [
   {
-    id: 's1',
+    id: 'b1',
     name: { fr: 'Breakfast Fire Place', en: 'Fire Place Breakfast' },
     description: { fr: 'Pain bagel, omelette saucisse, salami de bœuf, fromage edam, cheddar', en: 'Bagel bread, sausage omelette, beef salami, edam, cheddar' },
     price: '55 DH',
     category: MenuCategory.BREAKFAST
   },
   {
-    id: 's2',
-    name: { fr: 'Extasy Burger', en: 'Extasy Burger' },
-    description: { fr: 'Ciabatta, viande hachée (150g), champignon, oignon caramélisée, bacon emmental, roquette, tomate séchée, noix, sauce moutarde, miel', en: 'Ciabatta, beef (150g), mushrooms, caramelized onions, bacon, emmental, arugula, walnuts, honey mustard' },
+    id: 'bu1',
+    name: { fr: 'Burger Extasy', en: 'Extasy Burger' },
+    description: { fr: 'Ciabatta, viande hachée (150g), champignon, oignon caramélisée, bacon emmental', en: 'Ciabatta, beef (150g), mushrooms, caramelized onions, bacon, emmental' },
     price: '90 DH',
     category: MenuCategory.BURGERS
   },
   {
-    id: 's3',
+    id: 'r1',
     name: { fr: 'Risotto Fruit de Mer', en: 'Seafood Risotto' },
     description: { fr: 'Riz, crevette, calamar, palourdes, parmesan', en: 'Rice, shrimp, squid, clams, parmesan' },
     price: '85 DH',
     category: MenuCategory.RISOTTO
   },
   {
-    id: 's4',
+    id: 'p1',
     name: { fr: 'Pizza Fire Place', en: 'Fire Place Special Pizza' },
     description: { fr: 'Sauce tomate mozzarella viande hachée poulet bacon champignon', en: 'Tomato sauce, mozzarella, ground beef, chicken, bacon, mushrooms' },
     price: '80 DH',
@@ -236,5 +236,33 @@ export const REVIEWS = [
     rating: 5,
     comment: 'Petit-déjeuner incroyable. L\'atmosphère est calme et le service pro.',
     date: 'Il y a 4 jours'
+  },
+  {
+    id: 'r3',
+    name: 'Omar Benjelloun',
+    rating: 5,
+    comment: 'Le cadre est magnifique, surtout en fin de journée. Très bonne pizza.',
+    date: 'La semaine dernière'
+  },
+  {
+    id: 'r4',
+    name: 'Yasmine Drissi',
+    rating: 4,
+    comment: 'Un incontournable de la corniche. Les cocktails sont frais et originaux.',
+    date: 'Il y a 2 semaines'
+  },
+  {
+    id: 'r5',
+    name: 'Karim Tazi',
+    rating: 5,
+    comment: 'Service impeccable et vue imprenable sur le Sebou. Je recommande vivement.',
+    date: 'Le mois dernier'
+  },
+  {
+    id: 'r6',
+    name: 'Meryem Alami',
+    rating: 5,
+    comment: 'Parfait pour un brunch en famille. Les enfants ont adoré les crêpes.',
+    date: 'Il y a 1 mois'
   }
 ];
