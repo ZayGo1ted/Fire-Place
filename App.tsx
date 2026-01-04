@@ -16,18 +16,20 @@ const App: React.FC = () => {
   const t = TRANSLATIONS[lang];
 
   useEffect(() => {
-    // Add js-ready class to enable animations defined in CSS
     document.documentElement.classList.add('js-ready');
 
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
+      threshold: 0.15, // Higher threshold for more deliberate entry
+      rootMargin: "0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+        } else {
+          // Optional: Re-animate when scrolling back up? 
+          // Keeping it simple for luxury feel - once reveal, stays reveal.
         }
       });
     }, observerOptions);
@@ -40,7 +42,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] selection:bg-[#ff4d00] selection:text-white">
-      {/* The Navbar component now only contains the Corner Translation Toggle */}
       <Navbar lang={lang} setLang={setLang} />
       
       <main>
@@ -69,10 +70,10 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <footer className="py-24 bg-black border-t border-white/5">
+      <footer className="py-24 bg-black border-t border-white/5 reveal">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-16 mb-20">
-            <div className="col-span-1 md:col-span-2">
+            <div className="col-span-1 md:col-span-2 stagger-item">
               <div className="flex items-center gap-2 mb-8">
                 <div className="w-10 h-10 rounded-xl bg-[#ff4d00]/10 flex items-center justify-center border border-[#ff4d00]/20">
                    <Flame className="w-6 h-6 text-[#ff4d00]" />
@@ -108,7 +109,7 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div>
+            <div className="stagger-item" style={{ transitionDelay: '100ms' }}>
               <h5 className="text-white font-bold mb-8 uppercase tracking-widest text-[10px]">{t.footer.explore}</h5>
               <ul className="space-y-4 text-gray-500 text-xs font-medium uppercase tracking-wider">
                 <li><a href="#home" className="hover:text-[#ff4d00] transition-colors">{t.footer.home}</a></li>
@@ -118,7 +119,7 @@ const App: React.FC = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="stagger-item" style={{ transitionDelay: '200ms' }}>
               <h5 className="text-white font-bold mb-8 uppercase tracking-widest text-[10px]">{t.footer.contact}</h5>
               <ul className="space-y-4 text-gray-500 text-sm">
                 <li className="leading-relaxed font-light">{RESTAURANT_INFO.address}</li>

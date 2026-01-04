@@ -19,16 +19,10 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
         setLoading(false);
         return;
       }
-
       setLoading(true);
       try {
-        const { data, error } = await supabase
-          .from('menu_items')
-          .select('*');
-
-        if (error) {
-          console.error('Error fetching menu from Supabase:', error);
-        } else if (data && data.length > 0) {
+        const { data, error } = await supabase.from('menu_items').select('*');
+        if (data && data.length > 0) {
           const transformed: MenuItem[] = data.map((item: any) => ({
             id: item.id,
             name: { fr: item.name_fr, en: item.name_en },
@@ -44,38 +38,37 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
         setLoading(false);
       }
     };
-
     fetchMenu();
   }, []);
 
   const categories = [
-    { id: MenuCategory.BREAKFAST, name: t.cats[MenuCategory.BREAKFAST], icon: <Coffee size={18} /> },
-    { id: MenuCategory.LUNCH, name: t.cats[MenuCategory.LUNCH], icon: <Utensils size={18} /> },
-    { id: MenuCategory.DINNER, name: t.cats[MenuCategory.DINNER], icon: <Pizza size={18} /> },
-    { id: MenuCategory.DESSERTS, name: t.cats[MenuCategory.DESSERTS], icon: <IceCream size={18} /> },
-    { id: MenuCategory.DRINKS, name: t.cats[MenuCategory.DRINKS], icon: <Wine size={18} /> },
+    { id: MenuCategory.BREAKFAST, name: t.cats[MenuCategory.BREAKFAST], icon: <Coffee size={16} /> },
+    { id: MenuCategory.LUNCH, name: t.cats[MenuCategory.LUNCH], icon: <Utensils size={16} /> },
+    { id: MenuCategory.DINNER, name: t.cats[MenuCategory.DINNER], icon: <Pizza size={16} /> },
+    { id: MenuCategory.DESSERTS, name: t.cats[MenuCategory.DESSERTS], icon: <IceCream size={16} /> },
+    { id: MenuCategory.DRINKS, name: t.cats[MenuCategory.DRINKS], icon: <Wine size={16} /> },
   ];
 
   const filteredItems = menuItems.filter(item => item.category === activeCategory);
 
   return (
-    <section id="menu" className="py-32 bg-[#0a0a0a]">
+    <section id="menu" className="min-h-screen py-24 bg-[#0a0a0a] flex flex-col justify-center">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <span className="text-[#ff4d00] font-bold uppercase tracking-[0.5em] mb-4 block text-[10px]">{t.label}</span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 italic text-white tracking-tight">{t.title}</h2>
-          <div className="w-24 h-px bg-[#ff4d00] mx-auto opacity-40"></div>
+        <div className="text-center mb-16">
+          <span className="text-[#ff4d00] font-bold uppercase tracking-[0.6em] mb-4 block text-[9px] stagger-item">{t.label}</span>
+          <h2 className="text-4xl md:text-7xl font-serif font-bold mb-6 italic text-white tracking-tight stagger-item" style={{ transitionDelay: '100ms' }}>{t.title}</h2>
+          <div className="w-16 h-px bg-[#ff4d00] mx-auto opacity-40 stagger-item" style={{ transitionDelay: '200ms' }}></div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-20">
+        <div className="flex flex-wrap justify-center gap-3 mb-16 stagger-item" style={{ transitionDelay: '300ms' }}>
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-500 font-bold uppercase text-[10px] tracking-[0.2em] border leading-none liquid-glass
+              className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-500 font-bold uppercase text-[9px] tracking-[0.2em] border leading-none
                 ${activeCategory === cat.id
-                  ? 'bg-[#ff4d00] text-white shadow-2xl shadow-[#ff4d00]/30 border-[#ff4d00]'
-                  : 'text-white/50 hover:bg-white/10 hover:text-white'
+                  ? 'bg-[#ff4d00] text-white shadow-xl shadow-[#ff4d00]/20 border-[#ff4d00]'
+                  : 'bg-white/[0.03] text-white/40 border-white/5 hover:bg-white/10 hover:text-white'
                 }`}
             >
               {cat.icon}
@@ -86,20 +79,25 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
-            <Loader2 className="animate-spin text-[#ff4d00]" size={40} />
-            <p className="text-white/20 uppercase tracking-[0.3em] text-[10px] font-bold">Chargement du menu...</p>
+            <Loader2 className="animate-spin text-[#ff4d00]" size={32} />
+            <p className="text-white/20 uppercase tracking-[0.3em] text-[10px] font-bold">Menu Loading...</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto min-h-[400px]">
-            {filteredItems.length > 0 ? filteredItems.map((item) => (
-              <div key={item.id} className="group relative liquid-glass liquid-glass-hover p-10 rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2">
-                <div className="flex justify-between items-baseline mb-4">
-                  <h3 className="text-2xl font-serif font-bold group-hover:text-[#ff4d00] transition-colors duration-500 text-white tracking-tight">
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 max-w-5xl mx-auto">
+            {filteredItems.length > 0 ? filteredItems.map((item, idx) => (
+              <div 
+                key={item.id} 
+                className="stagger-item group border-b border-white/5 pb-8 flex flex-col"
+                style={{ transitionDelay: `${400 + (idx * 100)}ms` }}
+              >
+                <div className="flex justify-between items-baseline mb-3">
+                  <h3 className="text-xl md:text-2xl font-serif font-bold group-hover:text-[#ff4d00] transition-colors duration-500 text-white/90">
                     {item.name[lang]}
                   </h3>
-                  <span className="text-[#ff4d00] font-bold text-xl tracking-tighter">{item.price}</span>
+                  <div className="h-px flex-grow mx-4 border-b border-white/5 border-dotted"></div>
+                  <span className="text-[#ff4d00] font-bold text-lg tracking-tighter">{item.price}</span>
                 </div>
-                <p className="text-gray-500 text-sm leading-relaxed font-light">
+                <p className="text-gray-500 text-sm leading-relaxed font-light italic">
                   {item.description[lang]}
                 </p>
               </div>
@@ -111,12 +109,12 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
           </div>
         )}
 
-        <div className="mt-24 flex justify-center">
+        <div className="mt-20 flex justify-center stagger-item" style={{ transitionDelay: '800ms' }}>
           <a
-            href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/\+/g, '').replace(/ /g, '')}?text=Bonjour,%20je%20souhaite%20réserver%20une%20table.`}
+            href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/\+/g, '').replace(/ /g, '')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full max-w-sm h-16 flex items-center justify-center bg-white text-black font-bold rounded-2xl hover:bg-[#ff4d00] hover:text-white transition-all duration-500 transform hover:scale-105 shadow-2xl uppercase tracking-[0.3em] text-[10px] leading-none"
+            className="px-10 h-14 flex items-center justify-center bg-white text-black font-black rounded-xl hover:bg-[#ff4d00] hover:text-white transition-all duration-500 hover:scale-105 shadow-2xl uppercase tracking-[0.3em] text-[9px]"
           >
             {t.cta}
           </a>
