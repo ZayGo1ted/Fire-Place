@@ -14,11 +14,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-      :root { --fire-orange: #ff4d00; }
+      :root { 
+        --fire-orange: #ff4d00;
+        --glass-bg: rgba(10, 10, 10, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-blur: 24px;
+      }
       html { 
         scroll-behavior: smooth; 
         -webkit-font-smoothing: antialiased; 
-        scroll-padding-top: 2rem;
+        scroll-padding-top: 6rem; /* Space for the floating navbar */
       }
       body {
         font-family: 'Inter', sans-serif;
@@ -53,35 +58,32 @@
         transform: translateY(0) scale(1);
       }
       
-      .glass-dock {
-        background: rgba(10, 10, 10, 0.65);
-        backdrop-filter: blur(28px) saturate(210%);
-        -webkit-backdrop-filter: blur(28px) saturate(210%);
+      /* Master Liquid Glass Container */
+      .liquid-glass-nav {
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
         box-shadow: 
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          0 20px 50px -12px rgba(0, 0, 0, 0.8),
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+          0 0 0 1px var(--glass-border),
+          0 15px 35px -5px rgba(0, 0, 0, 0.5),
+          inset 0 1px 1px rgba(255, 255, 255, 0.05);
       }
 
-      .liquid-glass {
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 15px 35px rgba(0,0,0,0.5);
+      .nav-link-active {
+        position: relative;
+        color: #ffffff !important;
       }
-
-      .liquid-glass-hover {
-        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .liquid-glass-hover:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 77, 0, 0.4);
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 
-          inset 0 1px 1px rgba(255, 255, 255, 0.1), 
-          0 30px 60px -12px rgba(0,0,0,0.8),
-          0 0 20px rgba(255, 77, 0, 0.1);
+      .nav-link-active::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background: var(--fire-orange);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--fire-orange);
       }
       
       ::-webkit-scrollbar { width: 4px; }

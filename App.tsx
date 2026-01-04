@@ -19,7 +19,7 @@ const App: React.FC = () => {
     document.documentElement.classList.add('js-ready');
 
     const observerOptions = {
-      threshold: 0.15, // Higher threshold for more deliberate entry
+      threshold: 0.1,
       rootMargin: "0px"
     };
 
@@ -27,9 +27,6 @@ const App: React.FC = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-        } else {
-          // Optional: Re-animate when scrolling back up? 
-          // Keeping it simple for luxury feel - once reveal, stays reveal.
         }
       });
     }, observerOptions);
@@ -42,6 +39,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] selection:bg-[#ff4d00] selection:text-white">
+      {/* Liquid Glass Navigation Component */}
       <Navbar lang={lang} setLang={setLang} />
       
       <main>
