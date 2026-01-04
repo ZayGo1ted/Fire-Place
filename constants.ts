@@ -9,12 +9,18 @@ export const TRANSLATIONS = {
       location: "Kénitra • Corniche"
     },
     about: {
-      label: "Le Concept",
-      title: "Le Luxe Défini par le",
-      titleAccent: "Fleuve Sebou",
-      desc: "Situé sur la corniche vibrante de Kénitra, Fire Place mêle l'hospitalité marocaine authentique à la maîtrise culinaire internationale. Un sanctuaire de goût et de tranquillité.",
-      stat1: "Sourcing Artisanal",
-      stat2: "Vue Panoramique"
+      label: "L'Essence Fire Place",
+      title: "L'Alchimie du Feu et de",
+      titleAccent: "l'Eau",
+      desc: "Plus qu'un restaurant, Fire Place est une escale sensorielle sur la Corniche de Kénitra. Nous marions le crépitement ancestral du feu aux saveurs délicates du Sebou pour créer une expérience gastronomique où le temps s'arrête.",
+      stat1: "Sourcing Local",
+      stat2: "Vue Panoramique",
+      pillar1: "Héritage",
+      pillar1Desc: "Des recettes transmises, sublimées par des techniques modernes.",
+      pillar2: "Fraîcheur",
+      pillar2Desc: "Produits de la mer et du terroir sélectionnés chaque matin.",
+      pillar3: "Ambiance",
+      pillar3Desc: "Un design épuré conçu pour la sérénité au bord du fleuve."
     },
     menu: {
       label: "Gastronomie",
@@ -36,10 +42,13 @@ export const TRANSLATIONS = {
       open: "Ouvert tous les jours"
     },
     location: {
-      label: "Nous Visiter",
-      title: "Oasis au Bord de l'Eau",
-      desc: "Découvrez la corniche de Kénitra. Nous sommes situés directement sur le front de mer.",
-      cta: "Itinéraire"
+      label: "Nous Trouver",
+      title: "Sur les Rives du Sebou",
+      desc: "Situé au cœur battant de la Corniche, notre établissement offre une vue imprenable sur le fleuve Sebou, à quelques minutes du centre-ville de Kénitra.",
+      cta: "Lancer l'Itinéraire",
+      nearby: "À proximité",
+      landmark1: "Promenade de la Corniche",
+      landmark2: "Port de Kénitra"
     },
     reviews: {
       label: "Expérience Client",
@@ -63,12 +72,18 @@ export const TRANSLATIONS = {
       location: "Kenitra • Corniche"
     },
     about: {
-      label: "The Concept",
-      title: "Luxury Defined by the",
-      titleAccent: "Sebou River",
-      desc: "Located on Kenitra's vibrant Corniche, Fire Place blends authentic Moroccan hospitality with global culinary mastery. A sanctuary of taste and tranquility.",
-      stat1: "Artisanal Sourcing",
-      stat2: "Waterfront Views"
+      label: "The Essence",
+      title: "The Alchemy of Fire",
+      titleAccent: "& Water",
+      desc: "More than a restaurant, Fire Place is a sensory escape on Kenitra's Corniche. We blend the ancestral crackle of fire with the delicate flavors of the Sebou river to create a culinary journey where time stands still.",
+      stat1: "Local Sourcing",
+      stat2: "Panoramic Views",
+      pillar1: "Heritage",
+      pillar1Desc: "Timeless recipes elevated by contemporary techniques.",
+      pillar2: "Freshness",
+      pillar2Desc: "Daily selections from local markets and the Atlantic coast.",
+      pillar3: "Ambiance",
+      pillar3Desc: "Minimalist design crafted for riverside tranquility."
     },
     menu: {
       label: "Gastronomy",
@@ -91,9 +106,12 @@ export const TRANSLATIONS = {
     },
     location: {
       label: "Visit Us",
-      title: "Riverside Oasis",
-      desc: "Experience the scenic Corniche of Kenitra. We are located directly on the waterfront.",
-      cta: "Get Directions"
+      title: "On the Sebou Banks",
+      desc: "Located at the heart of the Corniche promenade, our establishment offers breathtaking views of the Sebou river, just minutes from Kenitra city center.",
+      cta: "Get Directions",
+      nearby: "Nearby Landmarks",
+      landmark1: "Corniche Promenade",
+      landmark2: "Kenitra River Port"
     },
     reviews: {
       label: "Guest Experience",
