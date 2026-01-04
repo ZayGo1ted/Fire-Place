@@ -7,6 +7,7 @@ export interface MenuItem {
   description: { fr: string; en: string };
   price: string;
   category: string;
+  isSpecial?: boolean;
 }
 
 export interface Review {
@@ -26,8 +27,32 @@ export interface GroundingChunk {
 
 export enum MenuCategory {
   BREAKFAST = 'Breakfast',
-  LUNCH = 'Lunch',
-  DINNER = 'Dinner',
+  HAPPY_KIDS = 'Happy Kids',
+  A_LA_CARTE = 'À La Carte',
+  EXTRAS = 'Extras',
+  BURGERS = 'Burgers',
+  SANDWICHES = 'Sandwiches',
+  SUPPLEMENTS = 'Supplements',
+  ENTREE_SNACKS = 'Entrée (Snacks)',
+  ENTREE_PLATS = 'Entrée (Plats)',
+  TARTINES = 'Tartines',
+  SALADE = 'Salade',
+  PASTICCIO = 'Pasticcio',
+  RISOTTO = 'Risotto',
+  HOT_DRINKS = 'Hot Drinks',
+  DRINKING_CHOCOLATE = 'Drinking Chocolate',
+  SPECIAL_HOT_DRINK = 'Special Hot Drink',
+  THE_INFUSION = 'Thé & Infusion',
+  COLD_DRINKS = 'Cold Drinks',
+  COCKTAILS = 'Cocktails',
+  SMOOTHIES = 'Smoothies',
+  JUS = 'Jus',
+  MILK_SHAKES = 'Milk Shakes',
+  CREPES = 'Crêpes',
+  GAUFRES = 'Gaufres',
   DESSERTS = 'Desserts',
-  DRINKS = 'Drinks',
+  PATES = 'Pâtes',
+  PANINIS = 'Paninis',
+  TACOS = 'Tacos',
+  PIZZA = 'Pizza'
 }

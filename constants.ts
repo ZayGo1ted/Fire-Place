@@ -28,10 +28,34 @@ export const TRANSLATIONS = {
       cta: "Réservation WhatsApp",
       cats: {
         [MenuCategory.BREAKFAST]: "Petit-Déjeuner",
-        [MenuCategory.LUNCH]: "Déjeuner",
-        [MenuCategory.DINNER]: "Dîner",
+        [MenuCategory.HAPPY_KIDS]: "Happy Kids",
+        [MenuCategory.A_LA_CARTE]: "À La Carte",
+        [MenuCategory.EXTRAS]: "Extras",
+        [MenuCategory.BURGERS]: "Burgers",
+        [MenuCategory.SANDWICHES]: "Sandwiches",
+        [MenuCategory.SUPPLEMENTS]: "Suppléments",
+        [MenuCategory.ENTREE_SNACKS]: "Snacks",
+        [MenuCategory.ENTREE_PLATS]: "Entrées Plats",
+        [MenuCategory.TARTINES]: "Tartines",
+        [MenuCategory.SALADE]: "Salades",
+        [MenuCategory.PASTICCIO]: "Pasticcio",
+        [MenuCategory.RISOTTO]: "Risotto",
+        [MenuCategory.HOT_DRINKS]: "Boissons Chaudes",
+        [MenuCategory.DRINKING_CHOCOLATE]: "Chocolats",
+        [MenuCategory.SPECIAL_HOT_DRINK]: "Spécialités Chaudes",
+        [MenuCategory.THE_INFUSION]: "Thés & Infusions",
+        [MenuCategory.COLD_DRINKS]: "Boissons Froides",
+        [MenuCategory.COCKTAILS]: "Cocktails",
+        [MenuCategory.SMOOTHIES]: "Smoothies",
+        [MenuCategory.JUS]: "Jus Frais",
+        [MenuCategory.MILK_SHAKES]: "Milk Shakes",
+        [MenuCategory.CREPES]: "Crêpes",
+        [MenuCategory.GAUFRES]: "Gaufres",
         [MenuCategory.DESSERTS]: "Desserts",
-        [MenuCategory.DRINKS]: "Boissons"
+        [MenuCategory.PATES]: "Pâtes",
+        [MenuCategory.PANINIS]: "Paninis",
+        [MenuCategory.TACOS]: "Tacos",
+        [MenuCategory.PIZZA]: "Pizzas"
       }
     },
     contact: {
@@ -91,10 +115,34 @@ export const TRANSLATIONS = {
       cta: "WhatsApp Reservation",
       cats: {
         [MenuCategory.BREAKFAST]: "Breakfast",
-        [MenuCategory.LUNCH]: "Lunch",
-        [MenuCategory.DINNER]: "Dinner",
+        [MenuCategory.HAPPY_KIDS]: "Happy Kids",
+        [MenuCategory.A_LA_CARTE]: "À La Carte",
+        [MenuCategory.EXTRAS]: "Extras",
+        [MenuCategory.BURGERS]: "Burgers",
+        [MenuCategory.SANDWICHES]: "Sandwiches",
+        [MenuCategory.SUPPLEMENTS]: "Supplements",
+        [MenuCategory.ENTREE_SNACKS]: "Snacks",
+        [MenuCategory.ENTREE_PLATS]: "Starter Plates",
+        [MenuCategory.TARTINES]: "Tartines",
+        [MenuCategory.SALADE]: "Salads",
+        [MenuCategory.PASTICCIO]: "Pasticcio",
+        [MenuCategory.RISOTTO]: "Risotto",
+        [MenuCategory.HOT_DRINKS]: "Hot Drinks",
+        [MenuCategory.DRINKING_CHOCOLATE]: "Chocolate Drinks",
+        [MenuCategory.SPECIAL_HOT_DRINK]: "Special Hot Drinks",
+        [MenuCategory.THE_INFUSION]: "Tea & Infusion",
+        [MenuCategory.COLD_DRINKS]: "Cold Drinks",
+        [MenuCategory.COCKTAILS]: "Cocktails",
+        [MenuCategory.SMOOTHIES]: "Smoothies",
+        [MenuCategory.JUS]: "Fresh Juice",
+        [MenuCategory.MILK_SHAKES]: "Milk Shakes",
+        [MenuCategory.CREPES]: "Crêpes",
+        [MenuCategory.GAUFRES]: "Waffles",
         [MenuCategory.DESSERTS]: "Desserts",
-        [MenuCategory.DRINKS]: "Drinks"
+        [MenuCategory.PATES]: "Pasta",
+        [MenuCategory.PANINIS]: "Paninis",
+        [MenuCategory.TACOS]: "Tacos",
+        [MenuCategory.PIZZA]: "Pizzas"
       }
     },
     contact: {
@@ -145,32 +193,32 @@ export const RESTAURANT_INFO = {
 
 export const INITIAL_MENU: MenuItem[] = [
   {
-    id: '1',
-    name: { fr: 'Ftour Beldi Spécial', en: 'Traditional Moroccan Breakfast' },
-    description: { fr: 'Petit-déjeuner traditionnel avec œufs, miel, fromage et thé à la menthe frais.', en: 'Traditional Moroccan breakfast with eggs, honey, cheese, and fresh mint tea.' },
+    id: 's1',
+    name: { fr: 'Breakfast Fire Place', en: 'Fire Place Breakfast' },
+    description: { fr: 'Pain bagel, omelette saucisse, salami de bœuf, fromage edam, cheddar', en: 'Bagel bread, sausage omelette, beef salami, edam, cheddar' },
     price: '55 DH',
     category: MenuCategory.BREAKFAST
   },
   {
-    id: '2',
-    name: { fr: 'Linguine aux Fruits de Mer', en: 'Seafood Linguine' },
-    description: { fr: 'Fruits de mer frais de la côte atlantique avec ail et tomates cerises.', en: 'Fresh local seafood from the Atlantic coast with garlic and cherry tomatoes.' },
-    price: '95 DH',
-    category: MenuCategory.LUNCH
+    id: 's2',
+    name: { fr: 'Extasy Burger', en: 'Extasy Burger' },
+    description: { fr: 'Ciabatta, viande hachée (150g), champignon, oignon caramélisée, bacon emmental, roquette, tomate séchée, noix, sauce moutarde, miel', en: 'Ciabatta, beef (150g), mushrooms, caramelized onions, bacon, emmental, arugula, walnuts, honey mustard' },
+    price: '90 DH',
+    category: MenuCategory.BURGERS
   },
   {
-    id: '3',
-    name: { fr: 'Burger Signature Fire Place', en: 'Fire Place Signature Burger' },
-    description: { fr: 'Bœuf premium, oignons caramélisés, fromage fumé et sauce secrète.', en: 'Premium beef, caramelized onions, smoked cheese, and our secret house sauce.' },
-    price: '75 DH',
-    category: MenuCategory.LUNCH
+    id: 's3',
+    name: { fr: 'Risotto Fruit de Mer', en: 'Seafood Risotto' },
+    description: { fr: 'Riz, crevette, calamar, palourdes, parmesan', en: 'Rice, shrimp, squid, clams, parmesan' },
+    price: '85 DH',
+    category: MenuCategory.RISOTTO
   },
   {
-    id: '4',
-    name: { fr: 'Filet de Bœuf aux Champignons', en: 'Beef Fillet with Mushrooms' },
-    description: { fr: 'Filet de bœuf tendre servi avec une sauce crémeuse aux champignons des bois.', en: 'Tender beef fillet served with creamy forest mushroom sauce and mash.' },
-    price: '145 DH',
-    category: MenuCategory.DINNER
+    id: 's4',
+    name: { fr: 'Pizza Fire Place', en: 'Fire Place Special Pizza' },
+    description: { fr: 'Sauce tomate mozzarella viande hachée poulet bacon champignon', en: 'Tomato sauce, mozzarella, ground beef, chicken, bacon, mushrooms' },
+    price: '80 DH',
+    category: MenuCategory.PIZZA
   }
 ];
 
