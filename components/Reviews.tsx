@@ -63,11 +63,11 @@ const Reviews: React.FC<Props> = ({ lang }) => {
       
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 md:mb-24">
-          <span className="text-[#ff4d00] font-bold uppercase tracking-[0.5em] mb-4 block text-[9px] md:text-[10px]">{t.label}</span>
-          <h2 className="text-4xl md:text-7xl font-serif font-bold mb-6 italic text-white tracking-tight">{t.title}</h2>
+          <span className="text-[#ff4d00] font-bold uppercase tracking-[0.5em] mb-4 block text-[9px] md:text-[10px] stagger-item">{t.label}</span>
+          <h2 className="text-4xl md:text-7xl font-serif font-bold mb-6 italic text-white tracking-tight stagger-item" style={{ transitionDelay: '150ms' }}>{t.title}</h2>
           
           {sources.length > 0 && (
-            <div className="mt-6 flex justify-center gap-3 flex-wrap">
+            <div className="mt-6 flex justify-center gap-3 flex-wrap stagger-item" style={{ transitionDelay: '300ms' }}>
               {sources.map((s, i) => s.web && (
                 <a key={i} href={s.web.uri} target="_blank" rel="noopener" className="flex items-center gap-2 text-[8px] uppercase tracking-widest text-white/20 hover:text-[#ff4d00] transition-colors border border-white/5 px-4 py-2 rounded-full bg-white/[0.01]">
                   <ExternalLink size={10} /> {s.web.title}
@@ -77,7 +77,7 @@ const Reviews: React.FC<Props> = ({ lang }) => {
           )}
         </div>
 
-        <div className="relative max-w-[85rem] mx-auto">
+        <div className="relative max-w-[85rem] mx-auto stagger-item" style={{ transitionDelay: '450ms' }}>
           <div className="overflow-hidden">
             <div 
               className="flex transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
@@ -86,8 +86,8 @@ const Reviews: React.FC<Props> = ({ lang }) => {
               {Array.from({ length: totalPages }).map((_, pageIdx) => (
                 <div key={pageIdx} className="w-full flex-shrink-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 p-2">
                   {reviews.slice(pageIdx * itemsPerView, (pageIdx + 1) * itemsPerView).map((review, rIdx) => (
-                    <div key={`${review.id}-${rIdx}`} className="liquid-glass liquid-glass-hover p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full">
-                      <Quote className="text-[#ff4d00]/10 mb-6" size={32} />
+                    <div key={`${review.id}-${rIdx}`} className="liquid-glass liquid-glass-hover p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full group">
+                      <Quote className="text-[#ff4d00]/10 mb-6 group-hover:text-[#ff4d00]/30 transition-colors" size={32} />
                       <div className="flex gap-1 mb-6">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} size={12} className={i < review.rating ? "fill-[#ff4d00] text-[#ff4d00]" : "text-white/10"} />

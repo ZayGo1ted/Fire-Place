@@ -16,19 +16,19 @@ const Location: React.FC<Props> = ({ lang }) => {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-[1400px] mx-auto">
           
           {/* Information Panel */}
-          <div className="lg:col-span-5 stagger-item">
+          <div className="lg:col-span-5 flex flex-col justify-center">
             <div className="h-full liquid-glass p-10 md:p-16 rounded-[2.5rem] md:rounded-[3.5rem] flex flex-col justify-center">
-              <span className="text-[#ff4d00] font-bold uppercase tracking-[0.6em] mb-6 block text-[10px]">{t.location.label}</span>
-              <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 text-white tracking-tight leading-[1.1]">
+              <span className="text-[#ff4d00] font-bold uppercase tracking-[0.6em] mb-6 block text-[10px] stagger-item">{t.location.label}</span>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 text-white tracking-tight leading-[1.1] stagger-item" style={{ transitionDelay: '150ms' }}>
                 {t.location.title}
               </h2>
-              <p className="text-gray-400 mb-12 leading-relaxed text-lg font-light">
+              <p className="text-gray-400 mb-12 leading-relaxed text-lg font-light stagger-item" style={{ transitionDelay: '300ms' }}>
                 {t.location.desc}
               </p>
 
               {/* Proximity Indicators */}
               <div className="space-y-6 mb-12">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 stagger-item" style={{ transitionDelay: '450ms' }}>
                   <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff4d00]">
                     <Anchor size={18} />
                   </div>
@@ -37,7 +37,7 @@ const Location: React.FC<Props> = ({ lang }) => {
                     <span className="text-white font-medium tracking-tight text-sm">{t.location.landmark1}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 stagger-item" style={{ transitionDelay: '550ms' }}>
                   <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff4d00]">
                     <Compass size={18} />
                   </div>
@@ -48,7 +48,7 @@ const Location: React.FC<Props> = ({ lang }) => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 stagger-item" style={{ transitionDelay: '650ms' }}>
                 <div className="flex items-start gap-4 p-6 bg-white/5 rounded-2xl border border-white/5">
                   <MapPin className="text-[#ff4d00] shrink-0 mt-1" size={20} />
                   <p className="text-white/90 font-medium text-base tracking-tight leading-snug">{RESTAURANT_INFO.address}</p>
@@ -67,7 +67,7 @@ const Location: React.FC<Props> = ({ lang }) => {
           </div>
 
           {/* Map Presentation */}
-          <div className="lg:col-span-7 h-[500px] lg:h-auto stagger-item" style={{ transitionDelay: '200ms' }}>
+          <div className="lg:col-span-7 h-[500px] lg:h-auto stagger-item" style={{ transitionDelay: '800ms' }}>
             <div className="relative h-full w-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border border-white/10 shadow-2xl group">
               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-1000 z-10 pointer-events-none"></div>
               

@@ -32,9 +32,9 @@ const About: React.FC<Props> = ({ lang }) => {
               {t.about.desc}
             </p>
             
-            {/* The Pillars of Craft */}
-            <div className="grid sm:grid-cols-3 gap-8 stagger-item" style={{ transitionDelay: '450ms' }}>
-              <div className="flex flex-col gap-4">
+            {/* The Pillars of Craft - Staggered Sequentially */}
+            <div className="grid sm:grid-cols-3 gap-8 mb-16">
+              <div className="flex flex-col gap-4 stagger-item" style={{ transitionDelay: '450ms' }}>
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff4d00]">
                   <ShieldCheck size={18} />
                 </div>
@@ -43,7 +43,7 @@ const About: React.FC<Props> = ({ lang }) => {
                   <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar1Desc}</p>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 stagger-item" style={{ transitionDelay: '550ms' }}>
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff4d00]">
                   <Leaf size={18} />
                 </div>
@@ -52,7 +52,7 @@ const About: React.FC<Props> = ({ lang }) => {
                   <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar2Desc}</p>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 stagger-item" style={{ transitionDelay: '650ms' }}>
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff4d00]">
                   <Wind size={18} />
                 </div>
@@ -61,6 +61,18 @@ const About: React.FC<Props> = ({ lang }) => {
                   <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar3Desc}</p>
                 </div>
               </div>
+            </div>
+
+            <div className="flex items-center gap-12 px-6 stagger-item" style={{ transitionDelay: '800ms' }}>
+               <div className="flex flex-col">
+                  <span className="text-3xl font-serif font-bold text-white tracking-tighter">100%</span>
+                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat1}</span>
+               </div>
+               <div className="h-10 w-[1px] bg-white/10"></div>
+               <div className="flex flex-col">
+                  <span className="text-3xl font-serif font-bold text-white tracking-tighter italic">Scenic</span>
+                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat2}</span>
+               </div>
             </div>
           </div>
 
@@ -79,18 +91,6 @@ const About: React.FC<Props> = ({ lang }) => {
                   <span className="text-white font-serif text-2xl italic tracking-tight">"{t.common.slogan}"</span>
                 </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-12 px-6">
-               <div className="flex flex-col">
-                  <span className="text-3xl font-serif font-bold text-white tracking-tighter">100%</span>
-                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat1}</span>
-               </div>
-               <div className="h-10 w-[1px] bg-white/10"></div>
-               <div className="flex flex-col">
-                  <span className="text-3xl font-serif font-bold text-white tracking-tighter italic">Scenic</span>
-                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat2}</span>
-               </div>
             </div>
           </div>
 

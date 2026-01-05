@@ -156,11 +156,11 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
               {filteredItems.length > 0 ? filteredItems.map((item, idx) => (
                 <div 
                   key={item.id} 
-                  className="stagger-item group relative border-b border-white/5 pb-10 flex flex-col justify-between transition-all duration-700 hover:translate-y-[-4px] hover:border-[#ff4d00]/30"
+                  className="stagger-item group relative border-b border-white/5 pb-10 flex flex-col justify-between transition-all duration-700 hover:translate-y-[-4px] hover:scale-[1.01] hover:border-[#ff4d00]/30"
                   style={{ transitionDelay: `${idx % 6 * 50}ms` }}
                 >
                   {/* Subtle Glow Effect on Hover */}
-                  <div className="absolute inset-x-[-20px] inset-y-[-10px] bg-[#ff4d00]/0 group-hover:bg-[#ff4d00]/[0.02] blur-xl transition-all duration-700 rounded-[2rem] pointer-events-none"></div>
+                  <div className="absolute inset-x-[-20px] inset-y-[-10px] bg-[#ff4d00]/0 group-hover:bg-[#ff4d00]/[0.03] blur-2xl transition-all duration-700 rounded-[2rem] pointer-events-none"></div>
                   
                   <div className="relative">
                     <div className="flex justify-between items-baseline mb-3">
@@ -177,8 +177,9 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
                     )}
                   </div>
                   
-                  <div className="flex gap-2 mt-5 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-[#ff4d00]/5 text-[#ff4d00]/60 border border-[#ff4d00]/10 uppercase font-bold tracking-tighter">
+                  {/* Category Tags visible on Hover with slide-up effect */}
+                  <div className="flex gap-2 mt-5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-[#ff4d00]/10 text-[#ff4d00] border border-[#ff4d00]/20 uppercase font-bold tracking-tighter">
                        {t.menu.cats[item.category as MenuCategory] || item.category}
                      </span>
                   </div>

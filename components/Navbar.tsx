@@ -69,13 +69,13 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </span>
           </a>
 
-          {/* Desktop/Tablet Links - Adjusted for better spacing on md viewports */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-10 absolute left-1/2 -translate-x-1/2 w-auto whitespace-nowrap">
+          {/* Desktop Links - Optimized: hidden on md (tablets) to prevent title blending */}
+          <div className="hidden lg:flex items-center lg:gap-10 absolute left-1/2 -translate-x-1/2 w-auto whitespace-nowrap">
             {menuLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`text-[8px] lg:text-[10px] font-black uppercase tracking-[0.25em] lg:tracking-[0.3em] transition-all duration-300 hover:text-white ${
+                className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-white ${
                   activeSection === link.id ? 'nav-link-active' : 'text-white/40'
                 }`}
               >
@@ -99,10 +99,10 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
               {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             
-            {/* Mobile/Small-Tablet Hamburger */}
+            {/* Hamburger (Visible on Tablets/Mobile) */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
+              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
               aria-label="Open Menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -111,8 +111,8 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
         </nav>
       </div>
 
-      {/* Mobile Glass Overlay Menu */}
-      <div className={`fixed inset-0 z-[999] transition-all duration-700 md:hidden ${
+      {/* Mobile/Tablet Glass Overlay Menu */}
+      <div className={`fixed inset-0 z-[999] transition-all duration-700 lg:hidden ${
         mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
         <div className="absolute inset-0 bg-[#050505]/98 backdrop-blur-3xl"></div>
