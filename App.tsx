@@ -8,7 +8,7 @@ import Location from './components/Location.tsx';
 import Contact from './components/Contact.tsx';
 import Reviews from './components/Reviews.tsx';
 import { RESTAURANT_INFO, TRANSLATIONS } from './constants.ts';
-import { Instagram, Facebook, Flame } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 import { Language } from './types.ts';
 
 const App: React.FC = () => {
@@ -71,9 +71,12 @@ const App: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-16 mb-20">
             <div className="col-span-1 md:col-span-2 stagger-item">
-              <div className="flex items-center gap-2 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-[#ff4d00]/10 flex items-center justify-center border border-[#ff4d00]/20">
-                   <Flame className="w-6 h-6 text-[#ff4d00]" />
+              <div className="flex items-center gap-3 mb-8">
+                {/* Unified Brand Logo SVG */}
+                <div className="w-10 h-10 rounded-xl bg-[#ff4d00]/10 flex items-center justify-center border border-[#ff4d00]/20 shadow-lg shadow-[#ff4d00]/5">
+                   <svg viewBox="0 0 100 100" className="w-5 h-5 fill-[#ff4d00]">
+                     <path d="M50 15C50 15 32 45 32 65C32 76.0457 40.9543 85 50 85C59.0457 85 68 76.0457 68 65C68 45 50 15 50 15ZM50 75C44.4772 75 40 70.5228 40 65C40 58 50 45 50 45C50 45 60 58 60 65C60 70.5228 55.5228 75 50 75Z" />
+                   </svg>
                 </div>
                 <span className="text-2xl font-serif font-bold tracking-tight text-white">
                   FIRE <span className="text-[#ff4d00]">PLACE</span>

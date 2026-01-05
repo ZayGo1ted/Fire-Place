@@ -53,12 +53,12 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
           aria-label="Main Navigation"
           className={`pointer-events-auto liquid-glass-nav flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
             scrolled 
-              ? 'w-[95%] lg:w-[80%] rounded-2xl h-14 md:h-16 px-4 md:px-8 shadow-2xl saturate-[200%]' 
+              ? 'w-[95%] lg:w-[85%] rounded-2xl h-14 md:h-16 px-5 md:px-10 shadow-2xl saturate-[200%]' 
               : 'w-full md:w-full rounded-3xl h-16 md:h-20 px-5 md:px-12 shadow-lg'
           }`}
         >
           {/* Brand Identity */}
-          <a href="#home" className="flex items-center gap-2 md:gap-3 group shrink-0">
+          <a href="#home" className="flex items-center gap-2 md:gap-3 group shrink-0 relative z-20">
             <div className={`flex items-center justify-center rounded-xl bg-[#ff4d00] transition-all duration-500 shadow-lg shadow-[#ff4d00]/30 ${scrolled ? 'w-7 h-7' : 'w-9 h-9'}`}>
                <svg viewBox="0 0 100 100" className={`${scrolled ? 'w-4 h-4' : 'w-5 h-5'} fill-white group-hover:scale-110 transition-transform`}>
                  <path d="M50 15C50 15 32 45 32 65C32 76.0457 40.9543 85 50 85C59.0457 85 68 76.0457 68 65C68 45 50 15 50 15ZM50 75C44.4772 75 40 70.5228 40 65C40 58 50 45 50 45C50 45 60 58 60 65C60 70.5228 55.5228 75 50 75Z" />
@@ -69,13 +69,13 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </span>
           </a>
 
-          {/* Desktop Links - Optimized for Tablets (visible from md) */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-10 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop/Tablet Links - Adjusted for better spacing on md viewports */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-10 absolute left-1/2 -translate-x-1/2 w-auto whitespace-nowrap">
             {menuLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-white ${
+                className={`text-[8px] lg:text-[10px] font-black uppercase tracking-[0.25em] lg:tracking-[0.3em] transition-all duration-300 hover:text-white ${
                   activeSection === link.id ? 'nav-link-active' : 'text-white/40'
                 }`}
               >
@@ -85,7 +85,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
           </div>
 
           {/* Action Cluster */}
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center gap-2 md:gap-4 shrink-0 relative z-20">
             <div className="hidden xl:flex flex-col items-end mr-2">
               <span className="text-[7px] font-black uppercase tracking-widest text-white/30">{t.common.whatsapp}</span>
               <a href={waLink} className="text-[10px] font-bold text-white hover:text-[#ff4d00] transition-colors">{RESTAURANT_INFO.whatsapp}</a>
@@ -99,7 +99,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
               {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             
-            {/* Mobile Hamburger (Visible on small screens where links are hidden) */}
+            {/* Mobile/Small-Tablet Hamburger */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-white/60 hover:text-white transition-colors"

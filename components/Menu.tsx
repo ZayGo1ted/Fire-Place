@@ -152,30 +152,33 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
                <p className="text-white/20 uppercase tracking-[0.4em] text-[11px] font-black">{t.menu.loadingMenu}</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
+            <div className="grid md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-12">
               {filteredItems.length > 0 ? filteredItems.map((item, idx) => (
                 <div 
                   key={item.id} 
-                  className="stagger-item group border-b border-white/5 pb-10 flex flex-col justify-between"
+                  className="stagger-item group relative border-b border-white/5 pb-10 flex flex-col justify-between transition-all duration-700 hover:translate-y-[-4px] hover:border-[#ff4d00]/30"
                   style={{ transitionDelay: `${idx % 6 * 50}ms` }}
                 >
-                  <div>
+                  {/* Subtle Glow Effect on Hover */}
+                  <div className="absolute inset-x-[-20px] inset-y-[-10px] bg-[#ff4d00]/0 group-hover:bg-[#ff4d00]/[0.02] blur-xl transition-all duration-700 rounded-[2rem] pointer-events-none"></div>
+                  
+                  <div className="relative">
                     <div className="flex justify-between items-baseline mb-3">
                       <h3 className="text-xl md:text-2xl font-serif font-bold text-white group-hover:text-[#ff4d00] transition-colors duration-500">
                         {item.name[lang]}
                       </h3>
-                      <div className="h-px flex-grow mx-4 border-b border-white/5 border-dotted"></div>
-                      <span className="text-[#ff4d00] font-black text-lg tracking-tighter whitespace-nowrap">{item.price}</span>
+                      <div className="h-px flex-grow mx-4 border-b border-white/5 border-dotted group-hover:border-[#ff4d00]/20 transition-colors"></div>
+                      <span className="text-[#ff4d00] font-black text-lg tracking-tighter whitespace-nowrap group-hover:scale-110 transition-transform duration-500">{item.price}</span>
                     </div>
                     {item.description[lang] && (
-                      <p className="text-gray-500 text-sm leading-relaxed italic font-light max-w-md">
+                      <p className="text-gray-500 text-sm leading-relaxed italic font-light max-w-md group-hover:text-gray-400 transition-colors duration-500">
                         {item.description[lang]}
                       </p>
                     )}
                   </div>
                   
-                  <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-white/5 text-white/40 border border-white/5 uppercase font-bold tracking-tighter">
+                  <div className="flex gap-2 mt-5 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-[#ff4d00]/5 text-[#ff4d00]/60 border border-[#ff4d00]/10 uppercase font-bold tracking-tighter">
                        {t.menu.cats[item.category as MenuCategory] || item.category}
                      </span>
                   </div>
