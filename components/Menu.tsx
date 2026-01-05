@@ -10,24 +10,24 @@ import { supabase } from '../lib/supabase.ts';
 
 interface Props { lang: Language; }
 
-// High-level grouping for better UX with 29 categories
-const CHAPTERS = [
-  { id: 'morning', label: { fr: 'Matinée', en: 'Morning' }, icon: <Coffee />, cats: [MenuCategory.BREAKFAST, MenuCategory.HAPPY_KIDS, MenuCategory.A_LA_CARTE, MenuCategory.EXTRAS] },
-  { id: 'starters', label: { fr: 'Entrées', en: 'Starters' }, icon: <Filter />, cats: [MenuCategory.ENTREE_SNACKS, MenuCategory.ENTREE_PLATS, MenuCategory.TARTINES, MenuCategory.SALADE] },
-  { id: 'mains', label: { fr: 'Plats Principaux', en: 'Mains' }, icon: <Pizza />, cats: [MenuCategory.BURGERS, MenuCategory.SANDWICHES, MenuCategory.PATES, MenuCategory.PIZZA, MenuCategory.TACOS, MenuCategory.PANINIS] },
-  { id: 'gourmet', label: { fr: 'Signature', en: 'Gourmet' }, icon: <Flame />, cats: [MenuCategory.RISOTTO, MenuCategory.PASTICCIO] },
-  { id: 'drinks', label: { fr: 'Boissons', en: 'Drinks' }, icon: <Wine />, cats: [MenuCategory.HOT_DRINKS, MenuCategory.SPECIAL_HOT_DRINK, MenuCategory.DRINKING_CHOCOLATE, MenuCategory.THE_INFUSION, MenuCategory.COLD_DRINKS, MenuCategory.COCKTAILS, MenuCategory.SMOOTHIES, MenuCategory.JUS, MenuCategory.MILK_SHAKES] },
-  { id: 'sweets', label: { fr: 'Douceurs', en: 'Sweets' }, icon: <IceCream />, cats: [MenuCategory.CREPES, MenuCategory.GAUFRES, MenuCategory.DESSERTS] },
-];
-
 const MenuSection: React.FC<Props> = ({ lang }) => {
+  const t = TRANSLATIONS[lang];
+  
+  // High-level grouping for better UX
+  const CHAPTERS = useMemo(() => [
+    { id: 'morning', label: { fr: 'Matinée', en: 'Morning' }, icon: <Coffee />, cats: [MenuCategory.BREAKFAST, MenuCategory.HAPPY_KIDS, MenuCategory.A_LA_CARTE, MenuCategory.EXTRAS] },
+    { id: 'starters', label: { fr: 'Entrées', en: 'Starters' }, icon: <Filter />, cats: [MenuCategory.ENTREE_SNACKS, MenuCategory.ENTREE_PLATS, MenuCategory.TARTINES, MenuCategory.SALADE] },
+    { id: 'mains', label: { fr: 'Plats Principaux', en: 'Mains' }, icon: <Pizza />, cats: [MenuCategory.BURGERS, MenuCategory.SANDWICHES, MenuCategory.PATES, MenuCategory.PIZZA, MenuCategory.TACOS, MenuCategory.PANINIS] },
+    { id: 'gourmet', label: { fr: 'Signature', en: 'Gourmet' }, icon: <Flame />, cats: [MenuCategory.RISOTTO, MenuCategory.PASTICCIO] },
+    { id: 'drinks', label: { fr: 'Boissons', en: 'Drinks' }, icon: <Wine />, cats: [MenuCategory.HOT_DRINKS, MenuCategory.SPECIAL_HOT_DRINK, MenuCategory.DRINKING_CHOCOLATE, MenuCategory.THE_INFUSION, MenuCategory.COLD_DRINKS, MenuCategory.COCKTAILS, MenuCategory.SMOOTHIES, MenuCategory.JUS, MenuCategory.MILK_SHAKES] },
+    { id: 'sweets', label: { fr: 'Douceurs', en: 'Sweets' }, icon: <IceCream />, cats: [MenuCategory.CREPES, MenuCategory.GAUFRES, MenuCategory.DESSERTS] },
+  ], []);
+
   const [activeChapter, setActiveChapter] = useState(CHAPTERS[0].id);
   const [activeCategory, setActiveCategory] = useState<string>(CHAPTERS[0].cats[0]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>(INITIAL_MENU);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  
-  const t = TRANSLATIONS[lang].menu;
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -37,7 +37,7 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
       }
       setLoading(true);
       try {
-        const { data, error } = await supabase.from('menu_items').select('*').order('category', { ascending: true });
+        const { data } = await supabase.from('menu_items').select('*').order('category', { ascending: true });
         if (data && data.length > 0) {
           const transformed: MenuItem[] = data.map((item: any) => ({
             id: item.id,
@@ -74,30 +74,28 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
 
   return (
     <section id="menu" className="min-h-screen py-24 bg-[#050505] relative flex flex-col items-center">
-      {/* Dynamic Background */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-[#ff4d00]/5 blur-[120px] rounded-full"></div>
         <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-white/5 blur-[120px] rounded-full"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-4 stagger-item">
             <div className="h-px w-8 bg-[#ff4d00]"></div>
-            <span className="text-[#ff4d00] font-black uppercase tracking-[0.5em] text-[10px]">{t.label}</span>
+            <span className="text-[#ff4d00] font-black uppercase tracking-[0.5em] text-[10px]">{t.menu.label}</span>
             <div className="h-px w-8 bg-[#ff4d00]"></div>
           </div>
           <h2 className="text-5xl md:text-8xl font-serif font-bold text-white tracking-tighter mb-8 stagger-item">
-            The <span className="italic text-[#ff4d00]">Full</span> Experience
+            {lang === 'fr' ? 'L\'Expérience ' : 'The '}
+            <span className="italic text-[#ff4d00]">{lang === 'fr' ? 'Complète' : 'Full Experience'}</span>
           </h2>
 
-          {/* Liquid Search Bar */}
           <div className="max-w-2xl mx-auto relative stagger-item group" style={{ transitionDelay: '100ms' }}>
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-[#ff4d00] transition-colors" size={18} />
             <input 
               type="text" 
-              placeholder={lang === 'fr' ? 'Rechercher un plat, une boisson...' : 'Search for a dish, a drink...'}
+              placeholder={t.menu.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-16 bg-white/[0.03] border border-white/10 rounded-2xl pl-16 pr-6 text-white placeholder:text-white/20 focus:outline-none focus:border-[#ff4d00]/50 focus:bg-white/[0.05] transition-all backdrop-blur-md"
@@ -105,7 +103,6 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
           </div>
         </div>
 
-        {/* Chapter Switcher (Horizontal Scroll) */}
         {!searchQuery && (
           <div className="flex justify-center mb-8 stagger-item" style={{ transitionDelay: '200ms' }}>
             <div className="flex bg-white/[0.03] p-2 rounded-2xl border border-white/5 backdrop-blur-xl overflow-x-auto no-scrollbar max-w-full">
@@ -122,7 +119,7 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
                       : 'text-white/40 hover:text-white hover:bg-white/5'}`}
                 >
                   <span className={activeChapter === chapter.id ? 'text-black' : 'text-[#ff4d00]'}>
-                    {React.cloneElement(chapter.icon as React.ReactElement, { size: 16 })}
+                    {React.cloneElement(chapter.icon as React.ReactElement<any>, { size: 16 })}
                   </span>
                   <span className="text-[10px] font-black uppercase tracking-widest">{chapter.label[lang]}</span>
                 </button>
@@ -131,7 +128,6 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
           </div>
         )}
 
-        {/* Category Sub-Filters */}
         {!searchQuery && currentChapter && (
           <div className="flex flex-wrap justify-center gap-2 mb-16 stagger-item" style={{ transitionDelay: '300ms' }}>
             {currentChapter.cats.map((cat) => (
@@ -143,18 +139,17 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
                     ? 'bg-[#ff4d00]/10 border-[#ff4d00] text-[#ff4d00]' 
                     : 'bg-transparent border-white/10 text-white/40 hover:border-white/30 hover:text-white'}`}
               >
-                {cat}
+                {t.menu.cats[cat as MenuCategory] || cat}
               </button>
             ))}
           </div>
         )}
 
-        {/* Menu Grid */}
         <div className="max-w-6xl mx-auto">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-32 gap-6 stagger-item">
                <Loader2 className="animate-spin text-[#ff4d00]" size={40} />
-               <p className="text-white/20 uppercase tracking-[0.4em] text-[11px] font-black">Crafting Menu Data...</p>
+               <p className="text-white/20 uppercase tracking-[0.4em] text-[11px] font-black">{t.menu.loadingMenu}</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
@@ -179,16 +174,17 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
                     )}
                   </div>
                   
-                  {/* Item Badges */}
                   <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-white/5 text-white/40 border border-white/5 uppercase font-bold tracking-tighter">{item.category}</span>
+                     <span className="text-[8px] px-2 py-0.5 rounded-sm bg-white/5 text-white/40 border border-white/5 uppercase font-bold tracking-tighter">
+                       {t.menu.cats[item.category as MenuCategory] || item.category}
+                     </span>
                   </div>
                 </div>
               )) : (
                 <div className="col-span-2 text-center py-32 opacity-20 flex flex-col items-center gap-4">
                   <Hash size={48} strokeWidth={1} />
                   <p className="italic text-lg tracking-tight">
-                    {lang === 'fr' ? 'Aucun délice trouvé pour cette recherche.' : 'No delights found for this search.'}
+                    {t.menu.noResults}
                   </p>
                 </div>
               )}
@@ -196,21 +192,20 @@ const MenuSection: React.FC<Props> = ({ lang }) => {
           )}
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-32 flex flex-col items-center gap-8 stagger-item">
           <div className="flex items-center gap-6">
             <div className="h-px w-12 bg-white/10"></div>
             <Clock className="text-white/20" size={20} />
             <div className="h-px w-12 bg-white/10"></div>
           </div>
-          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Ready to taste?</p>
+          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mb-4">{t.menu.readyToTaste}</p>
           <a
             href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="group relative h-16 px-16 flex items-center justify-center bg-white text-black font-black rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 shadow-2xl"
           >
-            <span className="relative z-10 text-[10px] uppercase tracking-[0.3em]">{t.cta}</span>
+            <span className="relative z-10 text-[10px] uppercase tracking-[0.3em]">{t.menu.cta}</span>
             <div className="absolute inset-0 bg-[#ff4d00] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
           </a>
         </div>

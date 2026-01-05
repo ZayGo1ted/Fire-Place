@@ -39,7 +39,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] selection:bg-[#ff4d00] selection:text-white">
-      {/* Liquid Glass Navigation Component */}
       <Navbar lang={lang} setLang={setLang} />
       
       <main>

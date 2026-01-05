@@ -7,10 +7,9 @@ import { Language } from '../types.ts';
 interface Props { lang: Language; }
 
 const Location: React.FC<Props> = ({ lang }) => {
-  const t = TRANSLATIONS[lang].location;
+  const t = TRANSLATIONS[lang];
   return (
     <section id="location" className="py-24 md:py-32 bg-[#050505] relative overflow-hidden flex items-center min-h-screen">
-      {/* Background accents */}
       <div className="absolute bottom-0 right-0 w-[1000px] h-[600px] bg-[#ff4d00]/5 blur-[160px] pointer-events-none -mb-32"></div>
       
       <div className="container mx-auto px-6 relative z-10">
@@ -19,12 +18,12 @@ const Location: React.FC<Props> = ({ lang }) => {
           {/* Information Panel */}
           <div className="lg:col-span-5 stagger-item">
             <div className="h-full liquid-glass p-10 md:p-16 rounded-[2.5rem] md:rounded-[3.5rem] flex flex-col justify-center">
-              <span className="text-[#ff4d00] font-bold uppercase tracking-[0.6em] mb-6 block text-[10px]">{t.label}</span>
+              <span className="text-[#ff4d00] font-bold uppercase tracking-[0.6em] mb-6 block text-[10px]">{t.location.label}</span>
               <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 text-white tracking-tight leading-[1.1]">
-                {t.title}
+                {t.location.title}
               </h2>
               <p className="text-gray-400 mb-12 leading-relaxed text-lg font-light">
-                {t.desc}
+                {t.location.desc}
               </p>
 
               {/* Proximity Indicators */}
@@ -34,8 +33,8 @@ const Location: React.FC<Props> = ({ lang }) => {
                     <Anchor size={18} />
                   </div>
                   <div>
-                    <span className="text-white/40 text-[9px] font-black uppercase tracking-widest block mb-1">{t.nearby}</span>
-                    <span className="text-white font-medium tracking-tight text-sm">{t.landmark1}</span>
+                    <span className="text-white/40 text-[9px] font-black uppercase tracking-widest block mb-1">{t.location.nearby}</span>
+                    <span className="text-white font-medium tracking-tight text-sm">{t.location.landmark1}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -43,8 +42,8 @@ const Location: React.FC<Props> = ({ lang }) => {
                     <Compass size={18} />
                   </div>
                   <div>
-                    <span className="text-white/40 text-[9px] font-black uppercase tracking-widest block mb-1">{t.nearby}</span>
-                    <span className="text-white font-medium tracking-tight text-sm">{t.landmark2}</span>
+                    <span className="text-white/40 text-[9px] font-black uppercase tracking-widest block mb-1">{t.location.nearby}</span>
+                    <span className="text-white font-medium tracking-tight text-sm">{t.location.landmark2}</span>
                   </div>
                 </div>
               </div>
@@ -61,7 +60,7 @@ const Location: React.FC<Props> = ({ lang }) => {
                   rel="noopener noreferrer"
                   className="w-full h-16 bg-[#ff4d00] text-white font-black rounded-2xl flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-[0.2em] text-[10px] shadow-2xl shadow-[#ff4d00]/20 active:scale-95"
                 >
-                  {t.cta} <Navigation size={18} />
+                  {t.location.cta} <Navigation size={18} />
                 </a>
               </div>
             </div>
@@ -70,7 +69,6 @@ const Location: React.FC<Props> = ({ lang }) => {
           {/* Map Presentation */}
           <div className="lg:col-span-7 h-[500px] lg:h-auto stagger-item" style={{ transitionDelay: '200ms' }}>
             <div className="relative h-full w-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border border-white/10 shadow-2xl group">
-              {/* Map Filter Overlay */}
               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-1000 z-10 pointer-events-none"></div>
               
               <iframe
@@ -83,11 +81,10 @@ const Location: React.FC<Props> = ({ lang }) => {
                 className="group-hover:filter-none transition-all duration-1000"
               ></iframe>
 
-              {/* Floating UI Elements on Map */}
               <div className="absolute bottom-8 left-8 z-20 pointer-events-none">
                  <div className="liquid-glass px-6 py-4 rounded-2xl border border-white/10 shadow-2xl flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-[#ff4d00] animate-pulse"></div>
-                    <span className="text-white text-[10px] font-black uppercase tracking-[0.2em]">Live on the Riverside</span>
+                    <span className="text-white text-[10px] font-black uppercase tracking-[0.2em]">{t.common.riverside}</span>
                  </div>
               </div>
             </div>

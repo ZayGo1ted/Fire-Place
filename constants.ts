@@ -3,6 +3,14 @@ import { MenuItem, MenuCategory } from './types.ts';
 
 export const TRANSLATIONS = {
   fr: {
+    common: {
+      reserve: "Réserver",
+      whatsapp: "WhatsApp",
+      chatNow: "Discuter",
+      loading: "Chargement...",
+      riverside: "Au bord du Sebou",
+      slogan: "Là où le feu rencontre le fleuve"
+    },
     hero: {
       tagline: "Un dîner au bord de l'eau où la chaleur marocaine rencontre l'élégance culinaire mondiale.",
       cta: "Explorer la Carte",
@@ -24,18 +32,22 @@ export const TRANSLATIONS = {
     },
     menu: {
       label: "Gastronomie",
-      title: "Notre Carte Signature",
+      title: "L'Expérience Complète",
+      searchPlaceholder: "Rechercher un plat, une boisson...",
+      loadingMenu: "Préparation de la carte...",
+      readyToTaste: "Prêt à déguster ?",
+      noResults: "Aucun délice trouvé pour cette recherche.",
       cta: "Réservation WhatsApp",
       cats: {
         [MenuCategory.BREAKFAST]: "Petit-Déjeuner",
-        [MenuCategory.HAPPY_KIDS]: "Happy Kids",
+        [MenuCategory.HAPPY_KIDS]: "Menu Enfants",
         [MenuCategory.A_LA_CARTE]: "À La Carte",
-        [MenuCategory.EXTRAS]: "Extras",
+        [MenuCategory.EXTRAS]: "Suppléments",
         [MenuCategory.BURGERS]: "Burgers",
         [MenuCategory.SANDWICHES]: "Sandwiches",
         [MenuCategory.SUPPLEMENTS]: "Suppléments",
         [MenuCategory.ENTREE_SNACKS]: "Snacks",
-        [MenuCategory.ENTREE_PLATS]: "Entrées Plats",
+        [MenuCategory.ENTREE_PLATS]: "Entrées",
         [MenuCategory.TARTINES]: "Tartines",
         [MenuCategory.SALADE]: "Salades",
         [MenuCategory.PASTICCIO]: "Pasticcio",
@@ -90,6 +102,14 @@ export const TRANSLATIONS = {
     }
   },
   en: {
+    common: {
+      reserve: "Book Table",
+      whatsapp: "WhatsApp",
+      chatNow: "Chat Now",
+      loading: "Loading...",
+      riverside: "Kenitra Riverside",
+      slogan: "Where the fire meets the river"
+    },
     hero: {
       tagline: "Riverside dining where Moroccan warmth meets world-class culinary elegance.",
       cta: "Explore Menu",
@@ -111,11 +131,15 @@ export const TRANSLATIONS = {
     },
     menu: {
       label: "Gastronomy",
-      title: "The Signature Menu",
+      title: "The Full Experience",
+      searchPlaceholder: "Search for a dish, a drink...",
+      loadingMenu: "Crafting Menu Data...",
+      readyToTaste: "Ready to taste?",
+      noResults: "No delights found for this search.",
       cta: "WhatsApp Reservation",
       cats: {
         [MenuCategory.BREAKFAST]: "Breakfast",
-        [MenuCategory.HAPPY_KIDS]: "Happy Kids",
+        [MenuCategory.HAPPY_KIDS]: "Kids Menu",
         [MenuCategory.A_LA_CARTE]: "À La Carte",
         [MenuCategory.EXTRAS]: "Extras",
         [MenuCategory.BURGERS]: "Burgers",
@@ -250,19 +274,5 @@ export const REVIEWS = [
     rating: 4,
     comment: 'Un incontournable de la corniche. Les cocktails sont frais et originaux.',
     date: 'Il y a 2 semaines'
-  },
-  {
-    id: 'r5',
-    name: 'Karim Tazi',
-    rating: 5,
-    comment: 'Service impeccable et vue imprenable sur le Sebou. Je recommande vivement.',
-    date: 'Le mois dernier'
-  },
-  {
-    id: 'r6',
-    name: 'Meryem Alami',
-    rating: 5,
-    comment: 'Parfait pour un brunch en famille. Les enfants ont adoré les crêpes.',
-    date: 'Il y a 1 mois'
   }
 ];

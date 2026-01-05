@@ -25,6 +25,13 @@ export interface GroundingChunk {
   };
 }
 
+// Added GalleryImage interface to resolve the import error in Gallery.tsx
+export interface GalleryImage {
+  url: string;
+  alt: string;
+  source: string;
+}
+
 export enum MenuCategory {
   BREAKFAST = 'Breakfast',
   HAPPY_KIDS = 'Happy Kids',

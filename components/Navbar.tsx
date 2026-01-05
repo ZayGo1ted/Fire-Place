@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Flame, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Flame, Menu, X, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { TRANSLATIONS, RESTAURANT_INFO } from '../constants.ts';
 import { Language } from '../types.ts';
 
@@ -19,7 +19,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       
-      // Basic section tracking for active state
       const sections = ['home', 'about', 'menu', 'reviews', 'location'];
       const current = sections.find(section => {
         const el = document.getElementById(section);
@@ -44,25 +43,22 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
     { id: 'contact', label: 'Contact' },
   ];
 
+  const waLink = `https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(lang === 'fr' ? 'Bonjour, je souhaite réserver une table.' : 'Hello, I would like to book a table.')}`;
+
   return (
     <>
-      {/* Liquid Glass Navbar - Universal Wrapper */}
       <div className="fixed top-0 left-0 w-full z-[1000] p-4 md:p-6 pointer-events-none flex justify-center">
         <nav 
           role="navigation"
           aria-label="Main Navigation"
           className={`pointer-events-auto liquid-glass-nav flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
             scrolled 
-              ? 'w-full md:w-[90%] lg:w-[75%] rounded-2xl h-16 px-4 md:px-8 shadow-2xl saturate-[200%]' 
+              ? 'w-full md:w-[95%] lg:w-[85%] rounded-2xl h-16 px-4 md:px-8 shadow-2xl saturate-[200%]' 
               : 'w-full md:w-full rounded-3xl h-20 px-6 md:px-12 shadow-lg'
           }`}
-          style={{
-            transform: `translateY(${scrolled ? '0' : '0'})`,
-            opacity: 1
-          }}
         >
           {/* Brand Identity */}
-          <a href="#home" className="flex items-center gap-3 group">
+          <a href="#home" className="flex items-center gap-3 group shrink-0">
             <div className={`flex items-center justify-center rounded-xl bg-[#ff4d00] transition-all duration-500 shadow-lg shadow-[#ff4d00]/30 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}>
               <Flame className={`${scrolled ? 'w-4 h-4' : 'w-5 h-5'} text-white group-hover:rotate-12 transition-transform`} />
             </div>
@@ -71,7 +67,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </span>
           </a>
 
-          {/* Desktop Links - Minimalist Centered Grid */}
+          {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-8">
             {menuLinks.map((link) => (
               <a
@@ -86,8 +82,13 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             ))}
           </div>
 
-          {/* Action Cluster (Language + CTA) */}
-          <div className="flex items-center gap-3 md:gap-6">
+          {/* Action Cluster */}
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="hidden xl:flex flex-col items-end mr-2">
+              <span className="text-[8px] font-black uppercase tracking-widest text-white/30">{t.common.whatsapp}</span>
+              <a href={waLink} className="text-[11px] font-bold text-white hover:text-[#ff4d00] transition-colors">{RESTAURANT_INFO.whatsapp}</a>
+            </div>
+
             <button 
               onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
               aria-label="Toggle Language"
@@ -97,10 +98,14 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </button>
             
             <a 
-              href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '')}`}
-              className="hidden sm:flex items-center gap-2 px-6 h-10 bg-white text-black rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-[#ff4d00] hover:text-white transition-all shadow-xl"
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 md:px-6 h-10 bg-white text-black rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-[#ff4d00] hover:text-white transition-all shadow-xl group"
             >
-              BOOK <ArrowUpRight size={12} />
+              <span className="hidden sm:inline uppercase">{t.common.reserve}</span>
+              <MessageCircle size={14} className="sm:hidden" />
+              <ArrowUpRight size={12} className="hidden sm:block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             {/* Mobile Hamburger */}
@@ -137,18 +142,21 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
             </a>
           ))}
 
-          <div className="mt-8 flex flex-col items-center gap-6">
+          <div className="mt-8 flex flex-col items-center gap-6 w-full max-w-xs">
             <div className="h-px w-12 bg-white/10"></div>
+            <a 
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#ff4d00] font-serif text-2xl tracking-tight"
+            >
+              <MessageCircle size={20} />
+              {RESTAURANT_INFO.whatsapp}
+            </a>
             <div className="flex gap-8">
                <a href={RESTAURANT_INFO.socials.instagram} className="text-white/20 hover:text-[#ff4d00] transition-colors font-bold tracking-widest text-[10px] uppercase">Instagram</a>
                <a href={RESTAURANT_INFO.socials.facebook} className="text-white/20 hover:text-[#ff4d00] transition-colors font-bold tracking-widest text-[10px] uppercase">Facebook</a>
             </div>
-            <a 
-              href={`tel:${RESTAURANT_INFO.phone}`}
-              className="text-[#ff4d00] font-serif text-xl tracking-tight"
-            >
-              {RESTAURANT_INFO.phone}
-            </a>
           </div>
         </div>
       </div>

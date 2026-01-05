@@ -7,7 +7,7 @@ import { ShieldCheck, Leaf, Wind } from 'lucide-react';
 interface Props { lang: Language; }
 
 const About: React.FC<Props> = ({ lang }) => {
-  const t = TRANSLATIONS[lang].about;
+  const t = TRANSLATIONS[lang];
   return (
     <section id="about" className="min-h-screen flex items-center py-24 bg-[#080808] relative overflow-hidden">
       {/* Background Ambience */}
@@ -19,17 +19,17 @@ const About: React.FC<Props> = ({ lang }) => {
           {/* Narrative Column */}
           <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col justify-center min-h-[60vh]">
             <div className="flex items-center gap-4 mb-8 stagger-item">
-              <span className="text-[#ff4d00] font-black uppercase tracking-[0.5em] text-[10px]">{t.label}</span>
+              <span className="text-[#ff4d00] font-black uppercase tracking-[0.5em] text-[10px]">{t.about.label}</span>
               <div className="h-[1px] w-12 bg-white/10"></div>
-              <span className="text-white/30 text-[9px] font-bold uppercase tracking-[0.2em]">Est. {RESTAURANT_INFO.openedDate}</span>
+              <span className="text-white/30 text-[9px] font-bold uppercase tracking-2em">Est. {RESTAURANT_INFO.openedDate}</span>
             </div>
 
             <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-10 leading-[0.85] text-white tracking-tighter stagger-item" style={{ transitionDelay: '150ms' }}>
-              {t.title} <br /> <span className="text-[#ff4d00] italic">{t.titleAccent}</span>
+              {t.about.title} <br /> <span className="text-[#ff4d00] italic">{t.about.titleAccent}</span>
             </h2>
 
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-16 max-w-xl stagger-item" style={{ transitionDelay: '300ms' }}>
-              {t.desc}
+              {t.about.desc}
             </p>
             
             {/* The Pillars of Craft */}
@@ -39,8 +39,8 @@ const About: React.FC<Props> = ({ lang }) => {
                   <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <h4 className="text-white font-serif text-lg mb-2">{t.pillar1}</h4>
-                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.pillar1Desc}</p>
+                  <h4 className="text-white font-serif text-lg mb-2">{t.about.pillar1}</h4>
+                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar1Desc}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
@@ -48,8 +48,8 @@ const About: React.FC<Props> = ({ lang }) => {
                   <Leaf size={18} />
                 </div>
                 <div>
-                  <h4 className="text-white font-serif text-lg mb-2">{t.pillar2}</h4>
-                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.pillar2Desc}</p>
+                  <h4 className="text-white font-serif text-lg mb-2">{t.about.pillar2}</h4>
+                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar2Desc}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
@@ -57,8 +57,8 @@ const About: React.FC<Props> = ({ lang }) => {
                   <Wind size={18} />
                 </div>
                 <div>
-                  <h4 className="text-white font-serif text-lg mb-2">{t.pillar3}</h4>
-                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.pillar3Desc}</p>
+                  <h4 className="text-white font-serif text-lg mb-2">{t.about.pillar3}</h4>
+                  <p className="text-gray-500 text-[11px] leading-relaxed uppercase tracking-wider">{t.about.pillar3Desc}</p>
                 </div>
               </div>
             </div>
@@ -67,7 +67,6 @@ const About: React.FC<Props> = ({ lang }) => {
           {/* Visual Showcase Column */}
           <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-8 stagger-item" style={{ transitionDelay: '200ms' }}>
             <div className="relative group">
-              {/* Image Frame with Liquid Border */}
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d00]/20 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
               <div className="relative aspect-[16/10] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl liquid-glass">
                 <img
@@ -77,21 +76,20 @@ const About: React.FC<Props> = ({ lang }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
                 <div className="absolute bottom-10 left-10">
-                  <span className="text-white font-serif text-2xl italic tracking-tight">"Where the fire meets the river"</span>
+                  <span className="text-white font-serif text-2xl italic tracking-tight">"{t.common.slogan}"</span>
                 </div>
               </div>
             </div>
 
-            {/* Sub-stats with rich formatting */}
             <div className="flex items-center gap-12 px-6">
                <div className="flex flex-col">
                   <span className="text-3xl font-serif font-bold text-white tracking-tighter">100%</span>
-                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.stat1}</span>
+                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat1}</span>
                </div>
                <div className="h-10 w-[1px] bg-white/10"></div>
                <div className="flex flex-col">
                   <span className="text-3xl font-serif font-bold text-white tracking-tighter italic">Scenic</span>
-                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.stat2}</span>
+                  <span className="text-[9px] text-[#ff4d00] font-black uppercase tracking-[0.4em]">{t.about.stat2}</span>
                </div>
             </div>
           </div>
