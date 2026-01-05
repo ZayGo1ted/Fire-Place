@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Flame, Menu, X, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 import { TRANSLATIONS, RESTAURANT_INFO } from '../constants.ts';
 import { Language } from '../types.ts';
 
@@ -24,7 +24,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          return rect.top <= 120 && rect.bottom >= 120;
         }
         return false;
       });
@@ -47,33 +47,35 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-[1000] p-4 md:p-6 pointer-events-none flex justify-center">
+      <div className="fixed top-0 left-0 w-full z-[1000] p-3 md:p-6 pointer-events-none flex justify-center">
         <nav 
           role="navigation"
           aria-label="Main Navigation"
           className={`pointer-events-auto liquid-glass-nav flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
             scrolled 
-              ? 'w-full md:w-[95%] lg:w-[85%] rounded-2xl h-16 px-4 md:px-8 shadow-2xl saturate-[200%]' 
-              : 'w-full md:w-full rounded-3xl h-20 px-6 md:px-12 shadow-lg'
+              ? 'w-[95%] lg:w-[80%] rounded-2xl h-14 md:h-16 px-4 md:px-8 shadow-2xl saturate-[200%]' 
+              : 'w-full md:w-full rounded-3xl h-16 md:h-20 px-5 md:px-12 shadow-lg'
           }`}
         >
           {/* Brand Identity */}
-          <a href="#home" className="flex items-center gap-3 group shrink-0">
-            <div className={`flex items-center justify-center rounded-xl bg-[#ff4d00] transition-all duration-500 shadow-lg shadow-[#ff4d00]/30 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}>
-              <Flame className={`${scrolled ? 'w-4 h-4' : 'w-5 h-5'} text-white group-hover:rotate-12 transition-transform`} />
+          <a href="#home" className="flex items-center gap-2 md:gap-3 group shrink-0">
+            <div className={`flex items-center justify-center rounded-xl bg-[#ff4d00] transition-all duration-500 shadow-lg shadow-[#ff4d00]/30 ${scrolled ? 'w-7 h-7' : 'w-9 h-9'}`}>
+               <svg viewBox="0 0 100 100" className={`${scrolled ? 'w-4 h-4' : 'w-5 h-5'} fill-white group-hover:scale-110 transition-transform`}>
+                 <path d="M50 15C50 15 32 45 32 65C32 76.0457 40.9543 85 50 85C59.0457 85 68 76.0457 68 65C68 45 50 15 50 15ZM50 75C44.4772 75 40 70.5228 40 65C40 58 50 45 50 45C50 45 60 58 60 65C60 70.5228 55.5228 75 50 75Z" />
+               </svg>
             </div>
-            <span className={`font-serif font-bold text-white tracking-tight transition-all duration-500 ${scrolled ? 'text-lg' : 'text-xl md:text-2xl'}`}>
+            <span className={`font-serif font-bold text-white tracking-tight transition-all duration-500 ${scrolled ? 'text-base md:text-lg' : 'text-lg md:text-2xl'}`}>
               FIRE <span className="text-[#ff4d00] italic">PLACE</span>
             </span>
           </a>
 
-          {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Links - Optimized for Tablets (visible from md) */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-10 absolute left-1/2 -translate-x-1/2">
             {menuLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-white ${
+                className={`text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-white ${
                   activeSection === link.id ? 'nav-link-active' : 'text-white/40'
                 }`}
               >
@@ -83,49 +85,38 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
           </div>
 
           {/* Action Cluster */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-2 md:gap-4 shrink-0">
             <div className="hidden xl:flex flex-col items-end mr-2">
-              <span className="text-[8px] font-black uppercase tracking-widest text-white/30">{t.common.whatsapp}</span>
-              <a href={waLink} className="text-[11px] font-bold text-white hover:text-[#ff4d00] transition-colors">{RESTAURANT_INFO.whatsapp}</a>
+              <span className="text-[7px] font-black uppercase tracking-widest text-white/30">{t.common.whatsapp}</span>
+              <a href={waLink} className="text-[10px] font-bold text-white hover:text-[#ff4d00] transition-colors">{RESTAURANT_INFO.whatsapp}</a>
             </div>
 
             <button 
               onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
               aria-label="Toggle Language"
-              className="text-[10px] font-black tracking-widest text-white/30 hover:text-white bg-white/5 rounded-lg px-2 py-1.5 md:px-3 md:py-2 transition-all border border-white/5"
+              className="text-[9px] md:text-[10px] font-black tracking-widest text-white/50 hover:text-white bg-white/5 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 transition-all border border-white/5"
             >
               {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             
-            <a 
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 md:px-6 h-10 bg-white text-black rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-[#ff4d00] hover:text-white transition-all shadow-xl group"
-            >
-              <span className="hidden sm:inline uppercase">{t.common.reserve}</span>
-              <MessageCircle size={14} className="sm:hidden" />
-              <ArrowUpRight size={12} className="hidden sm:block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-
-            {/* Mobile Hamburger */}
+            {/* Mobile Hamburger (Visible on small screens where links are hidden) */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
+              className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
               aria-label="Open Menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </nav>
       </div>
 
       {/* Mobile Glass Overlay Menu */}
-      <div className={`fixed inset-0 z-[999] transition-all duration-700 lg:hidden ${
+      <div className={`fixed inset-0 z-[999] transition-all duration-700 md:hidden ${
         mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
-        <div className="absolute inset-0 bg-[#050505]/95 backdrop-blur-3xl"></div>
-        <div className="relative h-full flex flex-col items-center justify-center gap-10 p-6">
+        <div className="absolute inset-0 bg-[#050505]/98 backdrop-blur-3xl"></div>
+        <div className="relative h-full flex flex-col items-center justify-center gap-8 p-6">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ff4d00]/5 blur-[120px] pointer-events-none rounded-full"></div>
           
           {menuLinks.map((link, idx) => (
@@ -133,7 +124,7 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
               key={link.id}
               href={`#${link.id}`}
               onClick={() => setMobileMenuOpen(false)}
-              className={`text-4xl font-serif font-bold text-white hover:text-[#ff4d00] transition-all transform ${
+              className={`text-3xl font-serif font-bold text-white hover:text-[#ff4d00] transition-all transform ${
                 mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
               style={{ transitionDelay: `${idx * 100}ms` }}
@@ -153,10 +144,6 @@ const Navbar: React.FC<Props> = ({ lang, setLang }) => {
               <MessageCircle size={20} />
               {RESTAURANT_INFO.whatsapp}
             </a>
-            <div className="flex gap-8">
-               <a href={RESTAURANT_INFO.socials.instagram} className="text-white/20 hover:text-[#ff4d00] transition-colors font-bold tracking-widest text-[10px] uppercase">Instagram</a>
-               <a href={RESTAURANT_INFO.socials.facebook} className="text-white/20 hover:text-[#ff4d00] transition-colors font-bold tracking-widest text-[10px] uppercase">Facebook</a>
-            </div>
           </div>
         </div>
       </div>
