@@ -3,50 +3,45 @@ import { GoogleGenAI } from "@google/genai";
 import { Review, GroundingChunk } from "../types.ts";
 
 /**
- * Robust fetch for real customer reviews using Google Search Grounding.
- * Strictly adheres to the requirement of using process.env.API_KEY.
+ * Fetch real customer reviews using Google Search Grounding.
+ * Adheres strictly to the requirement of using process.env.API_KEY directly.
  */
 export const fetchRealReviews = async (): Promise<{ reviews: Review[], sources: GroundingChunk[] }> => {
-  // Access the API key strictly from the environment variable as per guidelines
-  const apiKey = (typeof process !== 'undefined' && process.env?.API_KEY) 
-    ? process.env.API_KEY 
-    : (import.meta as any).env?.VITE_API_KEY;
-
-  if (!apiKey) {
-    console.warn("Gemini API_KEY not found in environment. Reviews feature disabled.");
-    return { reviews: [], sources: [] };
-  }
-
   try {
-    // Initialize AI strictly with named parameter from process.env string
-    const ai = new GoogleGenAI({ apiKey });
+    // Strictly follow initialization rules: use process.env.API_KEY directly in a named parameter.
+    // Assume this variable is pre-configured and accessible.
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
+    // Using gemini-3-flash-preview as per 'Basic Text Tasks' guidelines.
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: "Search for real, recent customer reviews of 'Fire Place Café & Restaurant' in Kenitra, Morocco. Provide a JSON array of 4 reviews: id, name, rating (1-5), comment, and date. Return ONLY the JSON array.",
+      contents: "Search for real, recent customer reviews of 'Fire Place Café & Restaurant' in Kenitra, Morocco on the web. Return a JSON array of 4 reviews with these fields: id, name, rating (number 1-5), comment, and date. Provide ONLY the JSON array in your text response.",
       config: {
         tools: [{ googleSearch: {} }],
       },
     });
 
-    const text = response.text || "";
+    // Access .text property directly as per guidelines (not a method).
+    const text = response.text;
+    if (!text) return { reviews: [], sources: [] };
+
     const sources = (response.candidates?.[0]?.groundingMetadata?.groundingChunks as GroundingChunk[]) || [];
     
     let reviews: Review[] = [];
     try {
-      // Clean potential markdown or extra text from AI response
-      const jsonStart = text.indexOf('[');
-      const jsonEnd = text.lastIndexOf(']');
-      if (jsonStart !== -1 && jsonEnd !== -1) {
-        const jsonStr = text.substring(jsonStart, jsonEnd + 1);
-        reviews = JSON.parse(jsonStr);
+      // Find JSON array in the response text using regex for safety
+      const match = text.match(/\[[\s\S]*\]/);
+      if (match) {
+        reviews = JSON.parse(match[0]);
       }
     } catch (e) {
-      console.error("Failed to parse Gemini JSON output:", e);
+      console.warn("Gemini output was not valid JSON, skipping automated parsing:", e);
     }
 
     return { reviews, sources };
   } catch (error) {
+    // Catch the 500 Rpc error gracefully to prevent app crash.
+    // This can occur if grounding tools are temporarily unavailable or restricted.
     console.error("Gemini API communication failed:", error);
     return { reviews: [], sources: [] };
   }
